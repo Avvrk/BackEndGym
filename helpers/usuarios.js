@@ -1,5 +1,5 @@
 // import Usuario from '../models/usuarios.js';
-import Sede from '../models/sede.js';
+import Sede from '../models/sedes.js';
 import pkg from 'validator';
 
 const { isNumeric } = pkg;
