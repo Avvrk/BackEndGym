@@ -47,9 +47,10 @@ const httpUsuarios = {
 		}
 	},
 	postUsuariosLog: async (req, res) => {
-		const { sede, nombre, email, telefono, password, rol, estado } = req.body;
+		const { sede, idSede, nombre, email, telefono, password, rol, estado } = req.body;
 		const usuario = new Usuario({
 			sede,
+			idSede,
 			nombre,
 			email,
 			telefono,

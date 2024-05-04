@@ -21,6 +21,8 @@ router.post('/login', [
 
 router.post('/', [
     check('sede', 'El nombre de la sede es requerido.').notEmpty(),
+    check('idSede', 'El ID de la sede debe ser un mongoId válido.').isMongoId(),
+    check('idSede').custom(helpersUsuarios.validarIdSede),
     check('nombre', 'El nombre del usuario es requerido.').notEmpty(),
     check('email', 'El correo electrónico es requerido.').notEmpty(),
     check('email', 'El correo electrónico debe tener un formato válido.').not().isEmail(),

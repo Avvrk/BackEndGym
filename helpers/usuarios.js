@@ -1,4 +1,5 @@
 // import Usuario from '../models/usuarios.js';
+import Sede from '../models/sede.js';
 import pkg from 'validator';
 
 const { isNumeric } = pkg;
@@ -9,6 +10,12 @@ const helpersUsuarios={
             if (!isNumeric(t)) {
                 throw new Error("El telefono debe ser un numero valido");
             }
+        }
+    },
+    validarIdSede: async (idS) => {
+        const buscarSede = await Sede.findById(idS);
+        if (!buscarSede){
+            throw new Error ("La sede del usuario no existe")
         }
     }
 }
