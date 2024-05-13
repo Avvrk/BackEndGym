@@ -16,7 +16,7 @@ const clienteSchema = new mongoose.Schema({
     /* foto */
     seguimiento: [
         {
-            fecha: { type: String },
+            fecha: { type: Date },
             peso: { type: Number },
             imc: { type: Number },
             brazo: { type: Number },

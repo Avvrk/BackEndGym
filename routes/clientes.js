@@ -60,6 +60,26 @@ router.post("/", [
     validarCampos
 ], httpClientes.postClientes);
 
+router.post("/seguimiento/:id", [
+    check('id', 'El id debe ser un mongoId valido').isMongoId(),
+    check('fecha', 'La fecha no puede estar vacia').notEmpty(),
+    check('fecha', 'Debe ser una fecha valida').isISO8601().toDate(),
+    check('peso', 'El peso no puede estar vacio').notEmpty(),
+    check('peso', 'El peso solo puede ser numeros').isNumeric(),
+    check('imc', 'El imc no puede estar vacio').notEmpty(),
+    check('imc', 'El imc solo puede ser numeros').isNumeric(),
+    check('brazo', 'El brazo no puede estar vacio').notEmpty(),
+    check('brazo', 'El brazo solo puede ser numeros').isNumeric(),
+    check('pierna', 'La pierna no puede estar vacio').notEmpty(),
+    check('pierna', 'La pierna solo puede ser numeros').isNumeric(),
+    check('cintura', 'El cintura no puede estar vacio').notEmpty(),
+    check('cintura', 'El cintura solo puede ser numeros').isNumeric(),
+    check('estatura', 'El estatura no puede estar vacio').notEmpty(),
+    check('estatura', 'El estatura solo puede ser numeros').isNumeric(),
+    validarJWT,
+    validarCampos
+], httpClientes.postClientesSeguimineto);
+
 router.put("/:id", [
     check('id', 'Se necesita un mongoId válido').isMongoId(),
     check('fechaIngreso').custom(helpersClientes.validarFechaIngreso),
@@ -70,6 +90,19 @@ router.put("/:id", [
     validarJWT,
     validarCampos
 ], httpClientes.putClientes);
+
+router.put("/seguimiento/:id", [
+    check('id', 'Se necesita un mongoId válido').isMongoId(),
+    check('fecha').custom(helpersClientes.validarFecha),
+    check('peso').custom(helpersClientes.validarPeso),
+    check('imc').custom(helpersClientes.validarImc),
+    check('brazo').custom(helpersClientes.validarBrazo),
+    check('pierna').custom(helpersClientes.validarPierna),
+    check('cintura').custom(helpersClientes.validarCintura),
+    check('estatura').custom(helpersClientes.validarEstatura),
+    validarJWT,
+    validarCampos
+], httpClientes.putClientesSeguimiento);
 
 router.put("/activar/:id", [
     check('id', 'Se necesita un mongoId válido').isMongoId(),
