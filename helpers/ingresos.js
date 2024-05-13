@@ -19,5 +19,4 @@ const helpersIngresos = {
     },
 };
 
-
 export default helpersIngresos;

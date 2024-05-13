@@ -1,4 +1,3 @@
-
 import validator from 'validator';
 
 const { isNumeric } = validator;
@@ -53,6 +52,5 @@ const helpersClientes = {
         }
     },
 };
-
 
 export default helpersClientes;

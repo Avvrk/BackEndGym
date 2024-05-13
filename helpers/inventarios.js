@@ -24,5 +24,4 @@ const helpersInventarios = {
     }
 };
 
-
 export default helpersInventarios;

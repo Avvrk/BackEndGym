@@ -44,5 +44,4 @@ const httpIngresos = {
     },
 };
 
-
 export default httpIngresos;

@@ -65,5 +65,4 @@ const httpMantenimientos = {
     },
 };
 
-
 export default httpMantenimientos;

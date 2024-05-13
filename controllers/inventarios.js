@@ -54,5 +54,4 @@ const httpInventarios = {
     },
 };
 
-
 export default httpInventarios;
