@@ -1,12 +1,7 @@
-// import Inventario from "../models/inventarios.js";
-import validator from 'validator';
-
-const { isNumeric } = validator;
-
 const helpersInventarios = {
     validarValor: (valor) => {
         if (valor !== undefined) {
-            if (!isNumeric(valor)) {
+            if (isNaN(Number(valor))) {
                 throw new Error("El valor debe ser numérico.");
             } else if (valor < 0) {
                 throw new Error("El valor debe ser positivo.");

@@ -1,7 +1,7 @@
 import validator from "validator";
 import Inventario from "../models/inventarios.js"
 
-const { isNumeric, isMongoId } = validator;
+const { isMongoId } = validator;
 
 function dateValido(dateString) {
     const registroTiempo = Date.parse(dateString);

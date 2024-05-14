@@ -1,7 +1,3 @@
-import validator from 'validator';
-
-const { isNumeric } = validator;
-
 const helpersSedes={
     validarCodigo: (c) => {
         if (c != undefined) {

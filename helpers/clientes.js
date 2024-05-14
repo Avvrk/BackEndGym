@@ -1,7 +1,3 @@
-import validator from 'validator';
-
-const { isNumeric } = validator;
-
 function dateValido(dateString) {
     const registroTiempo = Date.parse(dateString);
     if (isNaN(registroTiempo)) {
