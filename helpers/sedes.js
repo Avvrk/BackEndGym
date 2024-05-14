@@ -5,16 +5,24 @@ const { isNumeric } = validator;
 const helpersSedes={
     validarCodigo: (c) => {
         if (c != undefined) {
-            if (!isNumeric(c)) {
+            if (isNaN(Number(c))) {
                 throw new Error("El codigo debe ser un numero valido");
-            }
+            } else {
+				return true;
+			}
+        } else {
+            return true;
         }
     },
     validarTelefono: (t) => {
         if (t != undefined) {
-            if (!isNumeric(t)) {
+            if (isNaN(Number(t))) {
                 throw new Error("El telefono debe ser un numero valido");
+            } else {
+                return true
             }
+        } else {
+            return true;
         }
     }
 }

@@ -14,7 +14,7 @@ router.get('/inactivos', httpUsuarios.getUsuariosInactivos);
 
 router.post('/login', [
     check('email', 'El correo electrónico es requerido.').notEmpty(),
-    check('email', 'El correo electrónico debe tener un formato válido.').not().isEmail(),
+    check('email', 'El correo electrónico debe tener un formato válido.').isEmail(),
     check('password', 'La contraseña es requerida.').notEmpty(),
     validarCampos
 ], httpUsuarios.getUsuariosLogin);
@@ -25,9 +25,10 @@ router.post('/log', [
     check('idSede').custom(helpersUsuarios.validarIdSede),
     check('nombre', 'El nombre del usuario es requerido.').notEmpty(),
     check('email', 'El correo electrónico es requerido.').notEmpty(),
-    check('email', 'El correo electrónico debe tener un formato válido.').not().isEmail(),
+    check('email', 'El correo electrónico debe tener un formato válido.').isEmail(),
     check('telefono', 'El teléfono del usuario es requerido.').notEmpty(),
     check('telefono', 'El teléfono del usuario debe ser un número válido.').isNumeric(),
+    check('telefono', 'El teléfono del usuario debe tener al menos 10 dígitos.').isLength({ min: 10 }),
     check('password', 'La contraseña es requerida.').notEmpty(),
     check('rol', 'El rol del usuario es requerido.').notEmpty(),
     validarCampos
@@ -36,7 +37,8 @@ router.post('/log', [
 router.put('/:id', [
     check('id', 'El ID del mantenimiento es requerido.').notEmpty(),
     check('id', 'El ID del mantenimiento debe ser un mongoId válido.').isMongoId(),
-    check('telefono').custom(helpersUsuarios.validarTelefono),
+    check('telefono', 'El teléfono del usuario debe ser un número válido.').isNumeric(),
+    check('telefono', 'El teléfono del usuario debe tener al menos 10 dígitos.').isLength({ min: 10 }),
     validarCampos
 ], httpUsuarios.putUsuarios);
 

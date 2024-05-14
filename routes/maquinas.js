@@ -23,9 +23,9 @@ router.post('/', [
     check('codigo', 'El código no puede estar vacío.').notEmpty(),
     check('sede', 'La sede no puede estar vacía.').notEmpty(),
     check('descripcion', 'La descripción es requerida.').notEmpty(),
-    check('fechaIngreso', 'La fecha de ingreso debe ser una fecha válida.').not().isDate(),
-    check('fechaUltMan', 'La fecha del último mantenimiento debe ser una fecha válida.').not().isDate(),
+    check('fechaIngreso', 'La fecha de ingreso debe ser una fecha válida.').isISO8601().toDate(),
     check('fechaUltMan', 'La fecha del último mantenimiento no puede estar vacía.').notEmpty(),
+    check('fechaUltMan', 'La fecha del último mantenimiento debe ser una fecha válida.').isISO8601().toDate(),
     validarJWT,
     validarCampos
 ], httpMaquinas.postMaquinas);

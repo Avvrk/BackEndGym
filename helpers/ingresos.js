@@ -14,7 +14,11 @@ const helpersIngresos = {
         if (fecha !== undefined) {
             if (!dateValido(fecha)) {
                 throw new Error("La fecha no tiene el formato esperado (YYYY-MM-DD).");
-            }
+            } else {
+				return true;
+			}
+        } else {
+            return true;
         }
     },
 };

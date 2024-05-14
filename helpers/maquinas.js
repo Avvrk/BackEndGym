@@ -14,14 +14,22 @@ const helpersMaquinas={
         if (fI != undefined) {
             if (!dateValido(fI)) {
                 throw new Error("La fecha debe ser una fecha valida")
-            }
+            } else {
+				return true;
+			}
+        } else {
+            return true;
         }
     },
     validarUltMan: (fUM) => {
         if (fUM != undefined) {
             if (!dateValido(fUM)) {
                 throw new Error("La fecha debe ser una fecha valida")
-            }
+            } else {
+				return true;
+			}
+        } else {
+            return true;
         }
     }
 }

@@ -31,13 +31,13 @@ router.put('/:id', [
     validarCampos
 ], httpSedes.putSedes);
  
-router.put('/activar', [
+router.put('/activar/:id', [
     check('id', 'El ID de la sede es requerido.').notEmpty(),
     check('id', 'El ID de la sede debe ser un mongoId válido.').isMongoId(),
     validarCampos
 ], httpSedes.putSedesActivar);
 
-router.put('/inactivar', [
+router.put('/inactivar/:id', [
     check('id', 'El ID de la sede es requerido.').notEmpty(),
     check('id', 'El ID de la sede debe ser un mongoId válido.').isMongoId(),
     validarCampos

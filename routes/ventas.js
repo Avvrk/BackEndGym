@@ -17,6 +17,7 @@ router.get('/producto/:id', [
 
 router.post('/', [
     check('codigoProducto', 'El código del producto es requerido.').notEmpty(),
+    check('idInvetario', 'El idInventario debe ser un mongoId valido').isMongoId(),
     check('valorUnitario', 'El valor unitario es requerido.').notEmpty(),
     check('valorUnitario', 'El valor unitario debe ser un número válido.').isNumeric(),
     check('valorTotal', 'El valor total es requerido.').notEmpty(),
@@ -28,6 +29,7 @@ router.post('/', [
 router.put('/:id', [
     check('id', 'El ID del mantenimiento es requerido.').notEmpty(),
     check('id', 'El ID del mantenimiento debe ser un mongoId válido.').isMongoId(),
+    check('idInvetario').custom(helpersVentas.validarIdInventario),
     check('fecha').custom(helpersVentas.validarFecha),
     check('valorUnitario').custom(helpersVentas.validarValorUnitario),
     check('valorTotal').custom(helpersVentas.validarValorTotal),
