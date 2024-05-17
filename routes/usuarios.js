@@ -1,16 +1,17 @@
 import { Router } from 'express';
 import { check } from 'express-validator';
 import { validarCampos } from '../middlewares/validar-datos.js';
+import { validarJWT } from '../middlewares/validar-jwt.js';
 import httpUsuarios from '../controllers/usuarios.js';
 import helpersUsuarios from '../helpers/usuarios.js';
 
 const router = Router();
 
-router.get('/', httpUsuarios.getUsuarios);
+router.get('/', validarJWT, httpUsuarios.getUsuarios);
 
-router.get('/activos', httpUsuarios.getUsuariosActivos);
+router.get('/activos', validarJWT, httpUsuarios.getUsuariosActivos);
 
-router.get('/inactivos', httpUsuarios.getUsuariosInactivos);
+router.get('/inactivos', validarJWT, httpUsuarios.getUsuariosInactivos);
 
 router.post('/login', [
     check('email', 'El correo electrónico es requerido.').notEmpty(),
@@ -39,18 +40,21 @@ router.put('/:id', [
     check('id', 'El ID del mantenimiento debe ser un mongoId válido.').isMongoId(),
     check('telefono', 'El teléfono del usuario debe ser un número válido.').isNumeric(),
     check('telefono', 'El teléfono del usuario debe tener al menos 10 dígitos.').isLength({ min: 10 }),
+    validarJWT,
     validarCampos
 ], httpUsuarios.putUsuarios);
 
 router.put('/activar/:id', [
     check('id', 'El ID del usuario es requerido.').notEmpty(),
     check('id', 'El ID del usuario debe ser un mongoId válido.').isMongoId(),
+    validarJWT,
     validarCampos
 ], httpUsuarios.putUsuariosActivar);
 
 router.put('/inactivar/:id', [
     check('id', 'El ID del usuario es requerido.').notEmpty(),
     check('id', 'El ID del usuario debe ser un mongoId válido.').isMongoId(),
+    validarJWT,
     validarCampos
 ], httpUsuarios.putUsuariosInactivar);
 
