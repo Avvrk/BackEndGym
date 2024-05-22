@@ -38,8 +38,8 @@ router.post('/log', [
 router.put('/:id', [
     check('id', 'El ID del mantenimiento es requerido.').notEmpty(),
     check('id', 'El ID del mantenimiento debe ser un mongoId válido.').isMongoId(),
-    check('telefono', 'El teléfono del usuario debe ser un número válido.').isNumeric(),
-    check('telefono', 'El teléfono del usuario debe tener al menos 10 dígitos.').isLength({ min: 10 }),
+    check('idSede').custom(helpersUsuarios.validarIdSede),
+    check('telefono').custom(helpersUsuarios.validarTelefono),
     validarJWT,
     validarCampos
 ], httpUsuarios.putUsuarios);

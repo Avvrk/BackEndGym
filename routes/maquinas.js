@@ -1,9 +1,9 @@
 import { Router } from 'express';
 import { check } from 'express-validator';
 import { validarCampos } from '../middlewares/validar-datos.js';
+import { validarJWT } from '../middlewares/validar-jwt.js';
 import httpMaquinas from '../controllers/maquinas.js';
 import helpersMaquinas from '../helpers/maquinas.js';
-import { validarJWT } from '../middlewares/validar-jwt.js';
 
 const router = Router();
 
@@ -22,6 +22,8 @@ router.get('/inactivos', validarJWT, httpMaquinas.getMaquinasInactivos);
 router.post('/', [
     check('codigo', 'El código no puede estar vacío.').notEmpty(),
     check('sede', 'La sede no puede estar vacía.').notEmpty(),
+    check('idSede', 'El ID de la sede debe ser un mongoId válido.').isMongoId(),
+    check('idSede').custom(helpersMaquinas.validarIdSede),
     check('descripcion', 'La descripción es requerida.').notEmpty(),
     check('fechaIngreso', 'La fecha de ingreso debe ser una fecha válida.').isISO8601().toDate(),
     check('fechaUltMan', 'La fecha del último mantenimiento no puede estar vacía.').notEmpty(),

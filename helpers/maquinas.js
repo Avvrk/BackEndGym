@@ -1,3 +1,5 @@
+import Sede from "../models/sedes.js";
+
 function dateValido(dateString) {
     const registroTiempo = Date.parse(dateString);
     if (isNaN(registroTiempo)) {
@@ -31,6 +33,22 @@ const helpersMaquinas={
         } else {
             return true;
         }
+    },
+    validarIdSede: async (id) => {
+        if (id != undefined) {
+			try {
+				const buscarSede = await Sede.findById(idS);
+				if (!buscarSede) {
+					throw new Error("La sede del usuario no existe");
+				} else {
+					return true;
+				}
+			} catch (error) {
+				throw new Error("Error al buscar la sede en la base de datos: " + error.message);
+			}
+		} else {
+			return true;
+		}
     }
 }
 

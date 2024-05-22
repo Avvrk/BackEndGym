@@ -84,9 +84,9 @@ const httpUsuarios = {
     putUsuarios: async (req, res) => {
         try {
             const { id } = req.params;
-            const { sede, nombre, email, telefono, password, rol } = req.body;
+            const { sede, idSede, nombre, email, telefono, password, rol } = req.body;
             let activarCampos = {};
-            if (sede !== undefined) activarCampos.sede = sede;
+            if (sede !== undefined) activarCampos.sede = sede; activarCampos.idSede = idSede;
             if (nombre !== undefined) activarCampos.nombre = nombre;
             if (email !== undefined) activarCampos.email = email;
             if (telefono !== undefined) activarCampos.telefono = telefono;
