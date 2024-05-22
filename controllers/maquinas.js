@@ -9,7 +9,7 @@ const httpMaquinas = {
             res.status(500).json({ error: error.message });
         }
     },
-    getMaquinasID: async (req, res) => {
+    getMaquinasId: async (req, res) => {
         try {
             const { id } = req.params;
             const maquinasId = await Maquina.findById(id);

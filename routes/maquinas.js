@@ -13,7 +13,7 @@ router.get('/maquina/:id', [
     check('id', 'Se necesita un mongoId válido').isMongoId(),
     validarJWT,
     validarCampos
-], httpMaquinas.getMaquinasID);
+], httpMaquinas.getMaquinasId);
 
 router.get('/activos', validarJWT, httpMaquinas.getMaquinasActivos);
 

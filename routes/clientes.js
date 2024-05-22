@@ -9,6 +9,12 @@ const router = Router();
 
 router.get("/", validarJWT, httpClientes.getClientes);
 
+router.get("/cliente/:id", [
+    check('id', 'Se necesita un mongoId válido').isMongoId(),
+    validarJWT,
+    validarCampos
+], httpClientes.getClientesId);
+
 router.get("/activos", validarJWT, httpClientes.getClientesActivos);
 
 router.get("/inactivos", validarJWT, httpClientes.getClientesInactivos);

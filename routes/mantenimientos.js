@@ -9,6 +9,12 @@ const router = Router();
 
 router.get('/', validarJWT, httpMantenimientos.getMantenimientos);
 
+router.get('/mantenimiento/:id', [
+    check('id', 'Se necesita un mongoId válido').isMongoId(),
+    validarJWT,
+    validarCampos
+], httpMantenimientos.getMantenimientosId);
+
 router.get('/fechas', [
     check('fechaInicio', 'La fecha de inicio es requerida.').notEmpty(),
     check('fechaInicio', 'La fecha de inicio debe ser una fecha válida.').isISO8601().toDate(),

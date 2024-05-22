@@ -13,7 +13,7 @@ router.get('/producto/:id', [
     check('id', 'El ID del producto debe ser un mongoId válido.').isMongoId(),
     validarJWT,
     validarCampos
-], httpVentas.getVentasID);
+], httpVentas.getVentasId);
 
 router.post('/', [
     check('codigoProducto', 'El código del producto es requerido.').notEmpty(),

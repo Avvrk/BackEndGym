@@ -9,6 +9,12 @@ const router = Router();
 
 router.get("/", validarJWT, httpIngresos.getIngresos);
 
+router.get("/ingreso/:id", [
+    check('id', 'Se necesita un mongoId válido').isMongoId(),
+    validarJWT,
+    validarCampos
+], httpIngresos.getIngresosId);
+
 router.post("/", [
     check('fecha', 'La fecha no puede estar vacía').notEmpty(),
     check('fecha', 'Debe ser una fecha válida').isISO8601().toDate(),

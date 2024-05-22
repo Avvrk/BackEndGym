@@ -10,7 +10,7 @@ const httpVentas = {
             res.status(500).json({ error: "Error en el servidor" });
         }
     },
-    getVentasID: async (req, res) => {
+    getVentasId: async (req, res) => {
         try {
             const { id } = req.params;
             const ventas = await Venta.findById(id);

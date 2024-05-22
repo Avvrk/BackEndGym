@@ -10,6 +10,12 @@ const router = Router();
 
 router.get('/', validarJWT, httpInventarios.getInventarios);
 
+router.get('/inventario/:id', [
+    check('id', 'Se necesita un mongoId válido').isMongoId(),
+    validarJWT,
+    validarCampos
+], httpInventarios.getInventariosId);
+
 router.get('/total', validarJWT, httpInventarios.getInventariosTotal);
 
 router.post('/', [

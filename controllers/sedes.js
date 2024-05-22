@@ -9,7 +9,7 @@ const httpSedes = {
             res.status(500).json({ error: error.message });
         }
     },
-    getSedesid: async (req, res) => {
+    getSedesId: async (req, res) => {
         try {
             const { id } = req.params
             const sedes = await Sede.findById(id);

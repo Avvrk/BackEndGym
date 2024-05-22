@@ -9,6 +9,12 @@ const router = Router();
 
 router.get('/', validarJWT, httpPlanes.getPlanes);
 
+router.get('/plan/:id', [
+    check('id', 'Se necesita un mongoId válido').isMongoId(),
+    validarJWT,
+    validarCampos
+], httpPlanes.getPlanesId);
+
 router.get('/activos', validarJWT, httpPlanes.getPlanesActivos);
 
 router.get('/inactivos', validarJWT, httpPlanes.getPlanesInactivos);
