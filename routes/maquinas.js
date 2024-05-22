@@ -9,15 +9,15 @@ const router = Router();
 
 router.get('/', validarJWT, httpMaquinas.getMaquinas);
 
-router.get('/:id', [
+router.get('/maquina/:id', [
     check('id', 'Se necesita un mongoId válido').isMongoId(),
     validarJWT,
     validarCampos
 ], httpMaquinas.getMaquinasID);
 
-router.get('/maq/activos', validarJWT, httpMaquinas.getMaquinasActivos);
+router.get('/activos', validarJWT, httpMaquinas.getMaquinasActivos);
 
-router.get('/maq/inactivos', validarJWT, httpMaquinas.getMaquinasInactivos);
+router.get('/inactivos', validarJWT, httpMaquinas.getMaquinasInactivos);
 
 router.post('/', [
     check('codigo', 'El código no puede estar vacío.').notEmpty(),
