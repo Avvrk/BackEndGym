@@ -36,7 +36,7 @@ router.get("/cumpleanios/:fecha", [
     check('fecha', 'La fecha solo puede ser una fecha').isISO8601().toDate(),
     validarJWT,
     validarCampos
-], httpClientes.getClientesCumpleaños);
+], httpClientes.getClientesCumpleanios);
 
 router.get("/ingresaron/:fecha", [
     check('fecha', 'La fecha no puede estar vacía').notEmpty(),

@@ -52,7 +52,7 @@ const httpClientes = {
 			res.status(500).json({ error: error.message });
 		}
 	},
-	getClientesCumpleaños: async (req, res) => {
+	getClientesCumpleanios: async (req, res) => {
 		try {
 			const { fecha } = req.params;
 			const clientes = await Cliente.find({ fechaNacimiento: new Date(fecha) });
