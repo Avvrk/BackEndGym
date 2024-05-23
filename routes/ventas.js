@@ -9,7 +9,7 @@ const router = Router();
 
 router.get('/', validarJWT, httpVentas.getVentas);
 
-router.get('/producto/:id', [
+router.get('/id/:id', [
     check('id', 'El ID del producto debe ser un mongoId válido.').isMongoId(),
     validarJWT,
     validarCampos

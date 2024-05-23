@@ -9,7 +9,7 @@ const router = Router();
 
 router.get("/", validarJWT, httpIngresos.getIngresos);
 
-router.get("/ingreso/:id", [
+router.get("/id/:id", [
     check('id', 'Se necesita un mongoId válido').isMongoId(),
     validarJWT,
     validarCampos
