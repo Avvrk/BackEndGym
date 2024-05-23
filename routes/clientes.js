@@ -59,9 +59,11 @@ router.post("/", [
     check('telefono', 'El teléfono no puede estar vacío').notEmpty(),
     check('telefono', 'El teléfono solo puede ser números').isNumeric(),
     check('objetivo', 'El objetivo no puede estar vacío').notEmpty(),
+    check('foto', 'la foto no puede estar vacío').notEmpty(),
     check('estado', 'El estado no puede estar vacío').notEmpty(),
     check('estado', 'El estado solo puede ser números').isNumeric(),
     check('plan', 'El plan no puede estar vacío').notEmpty(),
+    check('idPlan').custom(helpersClientes.validarIdPlan),
     validarJWT,
     validarCampos
 ], httpClientes.postClientes);
@@ -77,6 +79,7 @@ router.post("/seguimiento/:id", [
     check('brazo', 'El brazo no puede estar vacio').notEmpty(),
     check('brazo', 'El brazo solo puede ser numeros').isNumeric(),
     check('pierna', 'La pierna no puede estar vacio').notEmpty(),
+    check('foto', 'La foto no puede estar vacío').notEmpty(),
     check('pierna', 'La pierna solo puede ser numeros').isNumeric(),
     check('cintura', 'El cintura no puede estar vacio').notEmpty(),
     check('cintura', 'El cintura solo puede ser numeros').isNumeric(),
@@ -93,6 +96,7 @@ router.put("/:id", [
     check('fechaNacimiento').custom(helpersClientes.validarFechaNacimiento),
     check('edad').custom(helpersClientes.validarEdad),
     check('telefono').custom(helpersClientes.validarTelefono),
+    check('idPlan').custom(helpersClientes.validarIdPlan),
     validarJWT,
     validarCampos
 ], httpClientes.putClientes);

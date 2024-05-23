@@ -72,7 +72,7 @@ const httpClientes = {
 	},
 	postClientes: async (req, res) => {
 		try {
-			const { nombre, fechaIngreso, documento, fechaNacimiento, edad, direccion, telefono, objetivo, estado, plan } = req.body;
+			const { nombre, fechaIngreso, documento, fechaNacimiento, edad, direccion, telefono, objetivo, estado, plan, idPlan, foto } = req.body;
 			const clientes = new Cliente({
 				nombre,
 				fechaIngreso,
@@ -84,6 +84,8 @@ const httpClientes = {
 				objetivo,
 				estado,
 				plan,
+				idPlan,
+				foto
 			});
 			await clientes.save();
 			res.json({ clientes });
@@ -114,7 +116,7 @@ const httpClientes = {
 	putClientes: async (req, res) => {
 		try {
 			const { id } = req.params;
-			const { nombre, fechaIngreso, documento, fechaNacimiento, edad, direccion, telefono, objetivo, plan } = req.body;
+			const { nombre, fechaIngreso, documento, fechaNacimiento, edad, direccion, telefono, objetivo, plan, idPlan, foto } = req.body;
 			let actualizarCampos = {};
 			if (nombre !== undefined) actualizarCampos.nombre = nombre;
 			if (fechaIngreso !== undefined) actualizarCampos.fechaIngreso = fechaIngreso;
@@ -124,7 +126,8 @@ const httpClientes = {
 			if (direccion !== undefined) actualizarCampos.direccion = direccion;
 			if (telefono !== undefined) actualizarCampos.telefono = telefono;
 			if (objetivo !== undefined) actualizarCampos.objetivo = objetivo;
-			if (plan !== undefined) actualizarCampos.plan = plan;
+			if (plan !== undefined) actualizarCampos.plan = plan; actualizarCampos.idPlan = idPlan;
+			if (foto !== undefined) actualizarCampos.foto = foto;
 			const clientes = await Cliente.findByIdAndUpdate(id, actualizarCampos, { new: true });
 			res.json({ clientes });
 		} catch (error) {

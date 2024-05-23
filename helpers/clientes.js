@@ -1,3 +1,5 @@
+import Plan from "../models/planes";
+
 function dateValido(dateString) {
     const registroTiempo = Date.parse(dateString);
     if (isNaN(registroTiempo)) {
@@ -152,6 +154,22 @@ const helpersClientes = {
             } else {
                 return true
             }
+        } else {
+            return true;
+        }
+    },
+    validarIdPlan: async (idP) => {
+        if (idP !== undefined) {
+            try {
+				const buscarPlan = await Plan.findById(idP);
+				if (!buscarPlan) {
+					throw new Error("El plan del cliente no existe");
+				} else {
+					return true;
+				}
+			} catch (error) {
+				throw new Error("Error al buscar el plan en la base de datos: " + error.message);
+			}
         } else {
             return true;
         }

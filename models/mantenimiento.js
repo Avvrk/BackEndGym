@@ -1,11 +1,7 @@
 import mongoose from "mongoose";
 
 const mantenimientoSchema = new mongoose.Schema({
-    idMaquina: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Maquina",
-        required: true,
-    },
+    idMaquina: { type: mongoose.Schema.Types.ObjectId, ref: "Maquina", required: true },
     fecha: { type: Date, default: Date.now() },
     descripcion: { type: String },
     responsable: { type: String },
