@@ -35,5 +35,20 @@ router.put('/:id', [
     validarCampos
 ], httpInventarios.putInventarios);
 
+router.put('/activar/:id', [
+    check('id', 'El ID del producto es requerido.').notEmpty(),
+    check('id', 'El ID del producto debe ser un mongoId válido.').isMongoId(),
+    check('id').custom(helpersInventarios.validarIdInventario),
+    validarJWT,
+    validarCampos
+], httpInventarios.putInventarioActivar);
+
+router.put('/inactivar/:id', [
+    check('id', 'El ID del producto es requerido.').notEmpty(),
+    check('id', 'El ID del producto debe ser un mongoId válido.').isMongoId(),
+    check('id').custom(helpersInventarios.validarIdInventario),
+    validarJWT,
+    validarCampos
+], httpInventarios.putInventarioInactivar);
 
 export default router;

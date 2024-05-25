@@ -1,4 +1,4 @@
-import Plan from "../models/planes";
+import Plan from "../models/planes.js";
 
 function dateValido(dateString) {
     const registroTiempo = Date.parse(dateString);

@@ -1,3 +1,5 @@
+import Inventario from "../models/inventarios.js";
+
 const helpersInventarios = {
     validarValor: (valor) => {
         if (valor !== undefined) {
@@ -21,6 +23,22 @@ const helpersInventarios = {
             } else {
                 return true
             }
+        } else {
+            return true;
+        }
+    },
+    validarIdInventario: async (idI) => {
+        if (idI !== undefined) {
+            try {
+				const buscarProducto = await Inventario.findById(idI);
+				if (!buscarProducto) {
+					throw new Error("El producto no existe");
+				} else {
+					return true;
+				}
+			} catch (error) {
+				throw new Error("Error al buscar el producto en la base de datos: " + error.message);
+			}
         } else {
             return true;
         }

@@ -52,6 +52,26 @@ const httpInventarios = {
             res.status(500).json({ error: error.message });
         }
     },
+    putInventarioActivar: async (req, res) => {
+        try {
+            const { id } = req.params;
+            const inventario = await Inventario.findByIdAndUpdate(id, { estado: 1 }, { new: true });
+            res.json({ inventario });
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({ error: "Error en el servidor" });
+        }
+    },
+    putInventarioInactivar: async (req, res) => {
+        try {
+            const { id } = req.params;
+            const inventario = await Inventario.findByIdAndUpdate(id, { estado: 0 }, { new: true });
+            res.json({ inventario });
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({ error: "Error en el servidor" });
+        }
+    }
 };
 
 export default httpInventarios;
