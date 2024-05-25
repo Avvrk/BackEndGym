@@ -72,11 +72,12 @@ const httpClientes = {
 	},
 	postClientes: async (req, res) => {
 		try {
-			const { nombre, fechaIngreso, documento, fechaNacimiento, edad, direccion, telefono, objetivo, estado, plan, idPlan, foto } = req.body;
+			const { nombre, fechaIngreso, documento, tipoDocumento, fechaNacimiento, edad, direccion, telefono, objetivo, estado, plan, idPlan, foto } = req.body;
 			const clientes = new Cliente({
 				nombre,
 				fechaIngreso,
 				documento,
+				tipoDocumento,
 				fechaNacimiento,
 				edad,
 				direccion,
@@ -116,11 +117,11 @@ const httpClientes = {
 	putClientes: async (req, res) => {
 		try {
 			const { id } = req.params;
-			const { nombre, fechaIngreso, documento, fechaNacimiento, edad, direccion, telefono, objetivo, plan, idPlan, foto } = req.body;
+			const { nombre, fechaIngreso, documento, tipoDocumento, fechaNacimiento, edad, direccion, telefono, objetivo, plan, idPlan, foto } = req.body;
 			let actualizarCampos = {};
 			if (nombre !== undefined) actualizarCampos.nombre = nombre;
 			if (fechaIngreso !== undefined) actualizarCampos.fechaIngreso = fechaIngreso;
-			if (documento !== undefined) actualizarCampos.documento = documento;
+			if (documento !== undefined) actualizarCampos.documento = documento; actualizarCampos.tipoDocumento = tipoDocumento;
 			if (fechaNacimiento !== undefined) actualizarCampos.fechaNacimiento = fechaNacimiento;
 			if (edad !== undefined) actualizarCampos.edad = edad;
 			if (direccion !== undefined) actualizarCampos.direccion = direccion;
