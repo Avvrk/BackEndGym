@@ -93,7 +93,17 @@ const httpUsuarios = {
         }
     },
     putUsuariosContraseña: async (req, res) => {
-
+        try {
+            const { id } = req.params;
+            const { nuevaContrasenia } = req.body;
+            const salt = bcryptjs.genSaltSync();
+            const encriptada = bcryptjs.hashSync(nuevaContrasenia, salt);
+            const usuario = await Usuario.findByIdAndUpdate(id, { password: encriptada }, { new: true });
+            res.json({ usuario });
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({ error: "Error en el servidor" });
+        }
     },
     putUsuariosActivar: async (req, res) => {
         try {

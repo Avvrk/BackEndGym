@@ -40,7 +40,6 @@ const httpVentas = {
         try {
             const { id } = req.params;
             const { ...info } = req.body;
-
             const ventas = await Venta.findByIdAndUpdate(id, info, { new: true });
             res.json({ ventas });
         } catch (error) {
