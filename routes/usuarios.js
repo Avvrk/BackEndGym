@@ -44,6 +44,14 @@ router.put('/:id', [
     validarCampos
 ], httpUsuarios.putUsuarios);
 
+router.put('/contraseña/:id', [
+    check('id', 'El ID del mantenimiento es requerido.').notEmpty(),
+    check('id', 'El ID del mantenimiento debe ser un mongoId válido.').isMongoId(),
+    check('contraseniaEncriptada').custom(helpersUsuarios.validarContrasenia),
+    validarJWT,
+    validarCampos
+])
+
 router.put('/activar/:id', [
     check('id', 'El ID del usuario es requerido.').notEmpty(),
     check('id', 'El ID del usuario debe ser un mongoId válido.').isMongoId(),
