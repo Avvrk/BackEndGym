@@ -40,13 +40,8 @@ const httpInventarios = {
     putInventarios: async (req, res) => {
         try {
             const { id } = req.params;
-            const { codigo, descripcion, valor, cantidad } = req.body;
-            let actualizarCampos = {};
-            if (codigo !== undefined) actualizarCampos.codigo = codigo;
-            if (descripcion !== undefined) actualizarCampos.descripcion = descripcion;
-            if (valor !== undefined) actualizarCampos.valor = valor;
-            if (cantidad !== undefined) actualizarCampos.cantidad = cantidad;
-            const inventarios = await Inventario.findByIdAndUpdate(id, actualizarCampos, { new: true });
+            const { ...info } = req.body;
+            const inventarios = await Inventario.findByIdAndUpdate(id, info, { new: true });
             res.json({ inventarios });
         } catch (error) {
             res.status(500).json({ error: error.message });

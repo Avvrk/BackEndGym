@@ -39,13 +39,9 @@ const httpVentas = {
     putVentas: async (req, res) => {
         try {
             const { id } = req.params;
-            const { fecha, codigoProducto, valorUnitario, valorTotal } = req.body;
-            let activarCampos = {};
-            if (fecha !== undefined) activarCampos.fecha = fecha;
-            if (codigoProducto !== undefined) activarCampos.codigoProducto = codigoProducto;
-            if (valorUnitario !== undefined) activarCampos.valorUnitario = valorUnitario;
-            if (valorTotal !== undefined) activarCampos.valorTotal = valorTotal;
-            const ventas = await Venta.findByIdAndUpdate(id, activarCampos, { new: true });
+            const { ...info } = req.body;
+
+            const ventas = await Venta.findByIdAndUpdate(id, info, { new: true });
             res.json({ ventas });
         } catch (error) {
             console.error(error);

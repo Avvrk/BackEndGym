@@ -84,20 +84,16 @@ const httpUsuarios = {
     putUsuarios: async (req, res) => {
         try {
             const { id } = req.params;
-            const { sede, idSede, nombre, email, telefono, password, rol } = req.body;
-            let activarCampos = {};
-            if (sede !== undefined) activarCampos.sede = sede; activarCampos.idSede = idSede;
-            if (nombre !== undefined) activarCampos.nombre = nombre;
-            if (email !== undefined) activarCampos.email = email;
-            if (telefono !== undefined) activarCampos.telefono = telefono;
-            if (password !== undefined) activarCampos.password = password;
-            if (rol !== undefined) activarCampos.rol = rol;
-            const usuario = await Usuario.findByIdAndUpdate(id, activarCampos, { new: true });
+            const { ...info } = req.body;
+            const usuario = await Usuario.findByIdAndUpdate(id, info, { new: true });
             res.json({ usuario });
         } catch (error) {
             console.log(error);
             res.status(500).json({ error: "Error en el servidor" });
         }
+    },
+    putUsuariosContraseña: async (req, res) => {
+
     },
     putUsuariosActivar: async (req, res) => {
         try {

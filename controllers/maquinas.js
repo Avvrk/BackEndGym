@@ -55,14 +55,8 @@ const httpMaquinas = {
     putMaquinas: async (req, res) => {
         try {
             const { id } = req.params;
-            const { codigo, sede, descripcion, fechaIngreso, FechaUltMan } = req.body;
-            let activarCampos = {};
-            if (codigo !== undefined) activarCampos.codigo = codigo;
-            if (sede !== undefined) activarCampos.sede = sede;
-            if (descripcion !== undefined) activarCampos.descripcion = descripcion;
-            if (fechaIngreso !== undefined) activarCampos.fechaIngreso = fechaIngreso;
-            if (FechaUltMan !== undefined) activarCampos.FechaUltMan = FechaUltMan;
-            const maquinas = await Maquina.findByIdAndUpdate(id, activarCampos, { new: true });
+            const { ...info } = req.body;
+            const maquinas = await Maquina.findByIdAndUpdate(id, info, { new: true });
             res.json({ maquinas });
         } catch (error) {
             res.status(500).json({ error: error.message });

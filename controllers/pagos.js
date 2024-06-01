@@ -65,13 +65,8 @@ const httpPagos = {
     putPagos: async (req, res) => {
         try {
             const { id } = req.params;
-            const { documento, plan, fecha, valor } = req.body;
-            let activarCampos = {};
-            if (documento !== undefined) activarCampos.documento = documento;
-            if (plan !== undefined) activarCampos.plan = plan;
-            if (fecha !== undefined) activarCampos.fecha = fecha;
-            if (valor !== undefined) activarCampos.valor = valor;
-            const pagos = await Pago.findByIdAndUpdate(id, activarCampos, { new: true });
+            const { ...info } = req.body;
+            const pagos = await Pago.findByIdAndUpdate(id, info, { new: true });
             res.json({ pagos });
         } catch (error) {
             res.status(500).json({ error: error.message });

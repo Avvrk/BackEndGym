@@ -55,15 +55,8 @@ const httpSedes = {
     putSedes: async (req, res) => {
         try {
             const { id } = req.params;
-            const { nombre, direccion, codigo, horario, ciudad, telefono } = req.body;
-            let activarCampos = {};
-            if (nombre !== undefined) activarCampos.nombre = nombre;
-            if (direccion !== undefined) activarCampos.direccion = direccion;
-            if (codigo !== undefined) activarCampos.codigo = codigo;
-            if (horario !== undefined) activarCampos.horario = horario;
-            if (ciudad !== undefined) activarCampos.ciudad = ciudad;
-            if (telefono !== undefined) activarCampos.telefono = telefono;
-            const sedes = await Sede.findByIdAndUpdate(id, activarCampos, { new: true });
+            const { ...info } = req.body;
+            const sedes = await Sede.findByIdAndUpdate(id, info, { new: true });
             res.json({ sedes });
         } catch (error) {
             res.status(500).json({ error: error.message });

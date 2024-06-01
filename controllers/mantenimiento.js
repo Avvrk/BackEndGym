@@ -50,14 +50,8 @@ const httpMantenimientos = {
     putMantenimientos: async (req, res) => {
         try {
             const { id } = req.params;
-            const { idMaquina, fecha, descripcion, responsable, precio } = req.body;
-            let actualizarCampos = {};
-            if (idMaquina !== undefined) actualizarCampos.idMaquina = idMaquina;
-            if (fecha !== undefined) actualizarCampos.fecha = fecha;
-            if (descripcion !== undefined) actualizarCampos.descripcion = descripcion;
-            if (responsable !== undefined) actualizarCampos.responsable = responsable;
-            if (precio !== undefined) actualizarCampos.precio = precio;
-            const mantenimiento = await Mantenimiento.findByIdAndUpdate(id, actualizarCampos, { new: true });
+            const { ...info } = req.body;
+            const mantenimiento = await Mantenimiento.findByIdAndUpdate(id, info, { new: true });
             res.json({ mantenimiento });
         } catch (error) {
             res.status(500).json({ error: error.message });

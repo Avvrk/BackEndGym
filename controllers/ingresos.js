@@ -31,12 +31,8 @@ const httpIngresos = {
     putIngresos: async (req, res) => {
         try {
             const { id } = req.params;
-            const { fecha, sede, cliente } = req.body;
-            let actualizarCampos = {};
-            if (fecha !== undefined) actualizarCampos.fecha = fecha;
-            if (sede !== undefined) actualizarCampos.sede = sede;
-            if (cliente !== undefined) actualizarCampos.cliente = cliente;
-            const ingresos = await Ingreso.findByIdAndUpdate(id, actualizarCampos, { new: true });
+            const { ...info } = req.body;
+            const ingresos = await Ingreso.findByIdAndUpdate(id, info, { new: true });
             res.json({ ingresos });
         } catch (error) {
             res.status(500).json({ error: error.message });

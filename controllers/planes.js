@@ -48,13 +48,8 @@ const httpPlanes = {
     putPlanes: async (req, res) => {
         try {
             const { id } = req.params;
-            const { codigo, descripcion, valor, dias } = req.body;
-            let actualizarCampos = {};
-            if (codigo !== undefined) actualizarCampos.codigo = codigo;
-            if (descripcion !== undefined) actualizarCampos.descripcion = descripcion;
-            if (valor !== undefined) actualizarCampos.valor = valor;
-            if (dias !== undefined) actualizarCampos.dias = dias;
-            const planes = await Plan.findByIdAndUpdate(id, actualizarCampos, { new: true });
+            const { ...info } = req.body;
+            const planes = await Plan.findByIdAndUpdate(id, info, { new: true });
             res.json({ planes });
         } catch (error) {
             res.status(500).json({ error: error.message });
