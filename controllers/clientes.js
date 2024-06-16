@@ -54,23 +54,9 @@ const httpClientes = {
 	},
 	getClientesCumpleanios: async (req, res) => {
 		try {
-const { fecha } = req.params;
-
-    // Crear las fechas de inicio y fin del día
-    const startOfDay = new Date(fecha);
-    startOfDay.setUTCHours(0, 0, 0, 0);  // Inicio del día en UTC
-    const endOfDay = new Date(fecha);
-    endOfDay.setUTCHours(23, 59, 59, 999);  // Fin del día en UTC
-
-    // Buscar clientes cuyo fechaNacimiento esté en el rango del día especificado
-    const clientes = await Cliente.find({
-      fechaNacimiento: {
-        $gte: startOfDay,
-        $lt: endOfDay
-      }
-    });
-
-    res.json({ clientes });
+			const { fecha } = req.params;
+			const clientes = await Cliente.find({ fechaNacimiento: new Date(fecha) });
+			res.json({ clientes });
 		} catch (error) {
 			res.status(500).json({ error: error.message });
 		}
@@ -78,7 +64,9 @@ const { fecha } = req.params;
 	getClientesIngresaron: async (req, res) => {
 		try {
 			const { fecha } = req.params;
-			const clientes = await Cliente.find({ fechaIngreso: new Date(fecha) });
+			const clientes = await Cliente.find({
+				fechaIngreso: new Date(fecha),
+			});
 			res.json({ clientes });
 		} catch (error) {
 			res.status(500).json({ error: error.message });
@@ -86,7 +74,21 @@ const { fecha } = req.params;
 	},
 	postClientes: async (req, res) => {
 		try {
-			const { nombre, fechaIngreso, documento, tipoDocumento, fechaNacimiento, edad, direccion, telefono, objetivo, estado, plan, idPlan, foto } = req.body;
+			const {
+				nombre,
+				fechaIngreso,
+				documento,
+				tipoDocumento,
+				fechaNacimiento,
+				edad,
+				direccion,
+				telefono,
+				objetivo,
+				estado,
+				plan,
+				idPlan,
+				foto,
+			} = req.body;
 			const clientes = new Cliente({
 				nombre,
 				fechaIngreso,
@@ -100,7 +102,7 @@ const { fecha } = req.params;
 				estado,
 				plan,
 				idPlan,
-				foto
+				foto,
 			});
 			await clientes.save();
 			res.json({ clientes });
@@ -111,7 +113,8 @@ const { fecha } = req.params;
 	postClientesSeguimineto: async (req, res) => {
 		try {
 			const { id } = req.params;
-			const { fecha, peso, imc, brazo, pierna, cintura, estatura } = req.body;
+			const { fecha, peso, imc, brazo, pierna, cintura, estatura } =
+				req.body;
 			const clientes = await Cliente.findById(id);
 			clientes.seguimiento.push({
 				fecha,
@@ -132,7 +135,9 @@ const { fecha } = req.params;
 		try {
 			const { id } = req.params;
 			const { ...info } = req.body;
-			const clientes = await Cliente.findByIdAndUpdate(id, info, { new: true });
+			const clientes = await Cliente.findByIdAndUpdate(id, info, {
+				new: true,
+			});
 			res.json({ clientes });
 		} catch (error) {
 			res.status(500).json({ error: error.message });
@@ -141,10 +146,19 @@ const { fecha } = req.params;
 	putClientesSeguimiento: async (req, res) => {
 		try {
 			const { id } = req.params;
-			const { index, fecha, peso, imc, brazo, pierna, cintura, estatura } = req.body;
+			const {
+				index,
+				fecha,
+				peso,
+				imc,
+				brazo,
+				pierna,
+				cintura,
+				estatura,
+			} = req.body;
 			const clientes = await Cliente.findById(id);
-            clientes.seguimiento.forEach((elemento, i) => {
-                if (i == index) {
+			clientes.seguimiento.forEach((elemento, i) => {
+				if (i == index) {
 					if (fecha !== undefined) elemento.fecha = fecha;
 					if (peso !== undefined) elemento.peso = peso;
 					if (imc !== undefined) elemento.imc = imc;
@@ -152,17 +166,21 @@ const { fecha } = req.params;
 					if (pierna !== undefined) elemento.pierna = pierna;
 					if (cintura !== undefined) elemento.cintura = cintura;
 					if (estatura !== undefined) elemento.estatura = estatura;
-                }
-            })
+				}
+			});
 			res.json({ clientes });
 		} catch (error) {
-            res.status(500).json({ error: error.message });
-        }
+			res.status(500).json({ error: error.message });
+		}
 	},
 	putClientesActivar: async (req, res) => {
 		try {
 			const { id } = req.params;
-			const clientes = await Cliente.findByIdAndUpdate(id, { estado: 1 }, { new: true });
+			const clientes = await Cliente.findByIdAndUpdate(
+				id,
+				{ estado: 1 },
+				{ new: true }
+			);
 			res.json({ clientes });
 		} catch (error) {
 			res.status(500).json({ error: error.message });
@@ -171,12 +189,16 @@ const { fecha } = req.params;
 	putClientesInactivar: async (req, res) => {
 		try {
 			const { id } = req.params;
-			const clientes = await Cliente.findByIdAndUpdate(id, { estado: 0 }, { new: true });
+			const clientes = await Cliente.findByIdAndUpdate(
+				id,
+				{ estado: 0 },
+				{ new: true }
+			);
 			res.json({ clientes });
 		} catch (error) {
 			res.status(500).json({ error: error.message });
 		}
-	}
+	},
 };
 
 export default httpClientes;
