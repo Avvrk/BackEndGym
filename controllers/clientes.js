@@ -46,7 +46,7 @@ const httpClientes = {
 	getClientesPlan: async (req, res) => {
 		try {
 			const { idPlan } = req.params;
-			const clientes = await Cliente.find({ idPlan: idPlan });
+			const clientes = await Cliente.find({ _idPlan: idPlan });
 			res.json({ clientes });
 		} catch (error) {
 			res.status(500).json({ error: error.message });
