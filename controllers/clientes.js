@@ -54,9 +54,23 @@ const httpClientes = {
 	},
 	getClientesCumpleanios: async (req, res) => {
 		try {
-			const { fecha } = req.params;
-			const clientes = await Cliente.find({ fechaNacimiento: new Date(fecha) });
-			res.json({ clientes });
+const { fecha } = req.params;
+
+    // Crear las fechas de inicio y fin del día
+    const startOfDay = new Date(fecha);
+    startOfDay.setUTCHours(0, 0, 0, 0);  // Inicio del día en UTC
+    const endOfDay = new Date(fecha);
+    endOfDay.setUTCHours(23, 59, 59, 999);  // Fin del día en UTC
+
+    // Buscar clientes cuyo fechaNacimiento esté en el rango del día especificado
+    const clientes = await Cliente.find({
+      fechaNacimiento: {
+        $gte: startOfDay,
+        $lt: endOfDay
+      }
+    });
+
+    res.json({ clientes });
 		} catch (error) {
 			res.status(500).json({ error: error.message });
 		}
