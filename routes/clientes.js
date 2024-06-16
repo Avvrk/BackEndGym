@@ -25,8 +25,8 @@ router.get("/seguimiento/:id", [
     validarCampos
 ], httpClientes.getClientesSeguimiento);
 
-router.get("/plan/:plan", [
-    check('plan', 'El plan no puede estar vacío').notEmpty(),
+router.get("/plan/:idPlan", [
+    check('idPlan', 'El plan no puede estar vacío').notEmpty(),
     validarJWT,
     validarCampos
 ], httpClientes.getClientesPlan);
