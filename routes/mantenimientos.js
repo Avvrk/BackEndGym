@@ -15,7 +15,7 @@ router.get('/id/:id', [
     validarCampos
 ], httpMantenimientos.getMantenimientosId);
 
-router.get('/fechas', [
+router.get('/fecha1/:fechaInicio/fecha2/:fechaFin', [
     check('fechaInicio', 'La fecha de inicio es requerida.').notEmpty(),
     check('fechaInicio', 'La fecha de inicio debe ser una fecha válida.').isISO8601().toDate(),
     check('fechaFin', 'La fecha de fin es requerida.').notEmpty(),
