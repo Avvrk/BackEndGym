@@ -24,6 +24,10 @@ router.get('/fechas', [
     validarCampos
 ], httpMantenimientos.getMantenimientosFechas);
 
+router.get('/activos', validarJWT, httpMantenimientos.getMantenimientosActivos);
+
+router.get('/inactivos', validarJWT, httpMantenimientos.getMantenimientosInactivos);
+
 router.post('/', [
     check('idMaquina', 'El ID de la máquina es requerido.').notEmpty(),
     check('idMaquina', 'El ID de la máquina debe ser un mongoId válido.').isMongoId(),
@@ -46,5 +50,9 @@ router.put('/:id', [
     validarJWT,
     validarCampos
 ], httpMantenimientos.putMantenimientos);
+
+router.put('/activar/:id', validarJWT, httpMantenimientos.putMantenimientosActivar);
+
+router.put('/inactivar/:id', validarJWT, httpMantenimientos.putMantenimientosInactivar);
 
 export default router;
