@@ -36,17 +36,19 @@ const httpMantenimientos = {
         }
     },
     getMantenimientosFechas: async (req, res) => {
-        try {
-            const { fechaInicio, fechaFin } = req.body;
-            const fechaInicioObj = new Date(fechaInicio);
-            const fechaFinObj = new Date(fechaFin);
-            const mantenimientos = await Mantenimiento.find({
-                fecha: { $gte: fechaInicioObj, $lte: fechaFinObj },
-            });
-            res.json({ mantenimientos });
-        } catch (error) {
-            res.status(500).json({ error: error.message });
-        }
+        const { fechaInicio, fechaFin } = req.body;
+        res.json({ fechaInicio, fechaFin });
+        // try {
+        //     const { fechaInicio, fechaFin } = req.body;
+        //     const fechaInicioObj = new Date(fechaInicio);
+        //     const fechaFinObj = new Date(fechaFin);
+        //     const mantenimientos = await Mantenimiento.find({
+        //         fecha: { $gte: fechaInicioObj, $lte: fechaFinObj },
+        //     });
+        //     res.json({ mantenimientos });
+        // } catch (error) {
+        //     res.status(500).json({ error: error.message });
+        // }
     },
     postMantenimientos: async (req, res) => {
         try {
