@@ -86,7 +86,7 @@ const httpClientes = {
 				objetivo,
 				estado,
 				plan,
-				idPlan,
+				_idPlan,
 				// foto,
 			} = req.body;
 			const clientes = new Cliente({
@@ -101,7 +101,7 @@ const httpClientes = {
 				objetivo,
 				estado,
 				plan,
-				idPlan,
+				_idPlan,
 				// foto,
 			});
 			await clientes.save();
