@@ -4,7 +4,7 @@ const clienteSchema = new mongoose.Schema({
     nombre: { type: String },
     fechaIngreso: { type: Date, default: Date.now },
     documento: { type: Number, unique: true },
-    tipoDocumento: { type: Number},
+    tipoDocumento: { type: String },
     fechaNacimiento: { type: Date },
     edad: { type: String },
     direccion: { type: String },
