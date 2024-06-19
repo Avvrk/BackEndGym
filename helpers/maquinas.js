@@ -37,7 +37,7 @@ const helpersMaquinas={
     validarIdSede: async (id) => {
         if (id != undefined) {
 			try {
-				const buscarSede = await Sede.findById(idS);
+				const buscarSede = await Sede.findById(id);
 				if (!buscarSede) {
 					throw new Error("La sede del usuario no existe");
 				} else {
