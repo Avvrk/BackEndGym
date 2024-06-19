@@ -87,7 +87,7 @@ const httpClientes = {
 				estado,
 				plan,
 				idPlan,
-				foto,
+				// foto,
 			} = req.body;
 			const clientes = new Cliente({
 				nombre,
