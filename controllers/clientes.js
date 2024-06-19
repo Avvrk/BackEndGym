@@ -102,7 +102,7 @@ const httpClientes = {
 				estado,
 				plan,
 				idPlan,
-				foto,
+				// foto,
 			});
 			await clientes.save();
 			res.json({ clientes });
