@@ -64,7 +64,7 @@ router.post("/", [
     // check('estado', 'El estado no puede estar vacío').notEmpty(),
     // check('estado', 'El estado solo puede ser números').isNumeric(),
     check('plan', 'El plan no puede estar vacío').notEmpty(),
-    check('idPlan').custom(helpersClientes.validarIdPlan),
+    check('_idPlan').custom(helpersClientes.validarIdPlan),
     validarJWT,
     validarCampos
 ], httpClientes.postClientes);
