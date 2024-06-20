@@ -28,7 +28,7 @@ const httpMaquinas = {
     },
     getMaquinasInactivos: async (req, res) => {
         try {
-            const maquinasIn = await Maquina.find({ estado: 0 });
+            const maquinas = await Maquina.find({ estado: 0 });
             res.json({ maquinas });
         } catch (error) {
             res.status(500).json({ error: error.message });
