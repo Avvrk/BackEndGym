@@ -36,14 +36,14 @@ const httpMaquinas = {
     },
     postMaquinas: async (req, res) => {
         try {
-            const { codigo, sede, idSede, descripcion, fechaIngreso, FechaUltMan, estado } = req.body;
+            const { codigo, sede, idSede, descripcion, fechaIngreso, fechaUltMan, estado } = req.body;
             const maquinas = new Maquina({
                 codigo,
                 sede,
                 idSede,
                 descripcion,
                 fechaIngreso,
-                FechaUltMan,
+                fechaUltMan,
                 estado,
             });
             await maquinas.save();
