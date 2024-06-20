@@ -12,16 +12,16 @@ const httpMaquinas = {
     getMaquinasId: async (req, res) => {
         try {
             const { id } = req.params;
-            const maquinasId = await Maquina.findById(id);
-            res.json({ maquinasId });
+            const maquinas = await Maquina.findById(id);
+            res.json({ maquinas });
         } catch (error) {
             res.status(500).json({ error: error.message });
         }
     },
     getMaquinasActivos: async (req, res) => {
         try {
-            const maquinasAc = await Maquina.find({ estado: 1 });
-            res.json({ maquinasAc });
+            const maquinas = await Maquina.find({ estado: 1 });
+            res.json({ maquinas });
         } catch (error) {
             res.status(500).json({ error: error.message });
         }
@@ -29,7 +29,7 @@ const httpMaquinas = {
     getMaquinasInactivos: async (req, res) => {
         try {
             const maquinasIn = await Maquina.find({ estado: 0 });
-            res.json({ maquinasIn });
+            res.json({ maquinas });
         } catch (error) {
             res.status(500).json({ error: error.message });
         }
