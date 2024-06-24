@@ -11,8 +11,12 @@ const httpPagos = {
     },
     getPagosFechas: async (req, res) => {
         try {
-            const { fecha } = req.params;
-            const pagos = await Pago.find({ fecha: fecha });
+            const { fechaInicio, fechaFin } = req.params;
+            const fechaInicioObj = new Date(fechaInicio);
+            const fechaFinObj = new Date(fechaFin);
+            const pagos = await Pago.find({
+                fecha: { $gte: fechaInicioObj, $lte: fechaFinObj },
+            });
             res.json({ pagos });
         } catch (error) {
             res.status(500).json({ error: error.message });
