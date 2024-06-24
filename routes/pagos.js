@@ -9,7 +9,7 @@ const router = Router();
 
 router.get('/', validarJWT, httpPagos.getPagos);
 
-router.get('/fechas/:fecha', [
+router.get('/fechainicio/:fechaInicio/fechafin/:fechaFin', [
     check('fechaInicio', 'La fecha de inicio es requerida.').notEmpty(),
     check('fechaInicio', 'La fecha de inicio debe ser una fecha válida.').isISO8601().toDate(),
     check('fechaFin', 'La fecha de fin es requerida.').notEmpty(),
