@@ -58,8 +58,8 @@ const httpPagos = {
     },
     postPagos: async (req, res) => {
         try {
-            const { documento, plan, fecha, valor, estado } = req.body; //el documento es el id del cliente
-            const pagos = new Pago({ documento, plan, fecha, valor, estado });
+            const { documento, _idPlan, _idCliente, fecha, valor } = req.body; //el documento es el id del cliente
+            const pagos = new Pago({ documento, _idPlan, _idCliente, fecha, valor });
             await pagos.save();
             res.json({ pagos });
         } catch (error) {
