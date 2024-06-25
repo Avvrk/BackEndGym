@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
 
 const pagoSchema = new mongoose.Schema({
-    cliente: {
+    _idCliente: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Cliente",
         require: true,
     },
-    idPlan: { type: mongoose.Schema.Types.ObjectId,
+    _idPlan: { type: mongoose.Schema.Types.ObjectId,
         ref: "Plane",
         require: true, },
     fecha: { type: Date },
