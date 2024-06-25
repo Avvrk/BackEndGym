@@ -35,9 +35,10 @@ router.get('/activos', validarJWT, httpPagos.getPagosActivos);
 router.get('/inactivos', validarJWT, httpPagos.getPagosInactivos);
 
 router.post('/', [
-    check('cliente', 'El ID del cliente es requerido.').notEmpty(),
-    check('cliente', 'El ID del cliente debe ser un mongoId válido.').isMongoId(),
-    check('plan', 'El plan es requerido.').notEmpty(),
+    check('_idCliente', 'El ID del cliente es requerido.').notEmpty(),
+    check('_idCliente', 'El ID del cliente debe ser un mongoId válido.').isMongoId(),
+    check('_idPlan', 'El plan es requerido.').notEmpty(),
+    check('_idPlan', 'El ID del plan debe ser un mongoId válido.').isMongoId(),
     check('fecha', 'La fecha es requerida.').notEmpty(),
     check('fecha', 'La fecha debe ser una fecha válida.').isISO8601().toDate(),
     check('valor', 'El valor es requerido.').notEmpty(),
