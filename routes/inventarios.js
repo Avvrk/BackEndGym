@@ -16,6 +16,10 @@ router.get('/id/:id', [
     validarCampos
 ], httpInventarios.getInventariosId);
 
+router.get('/activos', validarJWT, httpInventarios.getInventariosActivos);
+
+router.get('/inactivos', validarJWT, httpInventarios.getInventariosInactivos);
+
 router.get('/total', validarJWT, httpInventarios.getInventariosTotal);
 
 router.post('/', [
@@ -34,5 +38,17 @@ router.put('/:id', [
     validarJWT,
     validarCampos
 ], httpInventarios.putInventarios);
+
+router.put('/activar/:id', [
+    check('id', 'Se necesita un mongoId válido.').isMongoId(),
+    validarJWT,
+    validarCampos
+], httpInventarios.putInventarosActivar);
+
+router.put('/inactivar/:id', [
+    check('id', 'Se necesita un mongoId válido.').isMongoId(),
+    validarJWT,
+    validarCampos
+], httpInventarios.putInventarosInactivar);
 
 export default router;
