@@ -22,7 +22,7 @@ const httpInventarios = {
         try {
             const inventarios = await Inventario.find({ estado: 1 });
             res.json({ inventarios })
-        } catch {
+        } catch (error) {
             res.status(500).json({ error: error.message });
         }
     },
@@ -30,7 +30,7 @@ const httpInventarios = {
         try {
             const inventarios = await Inventario.find({ estado: 0 });
             res.json({ inventarios })
-        } catch {
+        } catch (error) {
             res.status(500).json({ error: error.message });
         }
     },
@@ -58,6 +58,24 @@ const httpInventarios = {
             const { id } = req.params;
             const { ...info } = req.body;
             const inventarios = await Inventario.findByIdAndUpdate(id, info, { new: true });
+            res.json({ inventarios });
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
+    },
+    putInventariosActivar: async (req, res) => {
+        try {
+            const { id } = req.params;
+            const inventarios = await Inventario.findByIdAndUpdate(id, {estado: 1}, {new: true});
+            res.json({ inventarios });
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
+    },
+    putInventariosInactivar: async (req, res) => {
+        try {
+            const { id } = req.params;
+            const inventarios = await Inventario.findByIdAndUpdate(id, {estado: 0}, {new: true});
             res.json({ inventarios });
         } catch (error) {
             res.status(500).json({ error: error.message });
