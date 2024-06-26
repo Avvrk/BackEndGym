@@ -20,6 +20,19 @@ const httpVentas = {
             res.status(500).json({ error: "Error en el servidor" });
         }
     },
+    getPagosFechas: async (req, res) => {
+        try {
+            const { fechaInicio, fechaFin } = req.params;
+            const fechaInicioObj = new Date(fechaInicio);
+            const fechaFinObj = new Date(fechaFin);
+            const ventas = await Venta.find({
+                fecha: { $gte: fechaInicioObj, $lte: fechaFinObj },
+            });
+            res.json({ ventas });
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
+    },
     postVentas: async (req, res) => {
         try {
             const { fecha, codigoProducto, valorUnitario, valorTotal } = req.body;
