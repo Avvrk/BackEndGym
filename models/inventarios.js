@@ -5,6 +5,7 @@ const inventarioSchema = new mongoose.Schema({
     descripcion: { type: String },
     valor: { type: Number },
     cantidad: { type: Number },
+    estado: { type: Number, default: 1 },
 });
 
 export default mongoose.model("Inventario", inventarioSchema);
