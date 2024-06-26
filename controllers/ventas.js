@@ -20,7 +20,7 @@ const httpVentas = {
             res.status(500).json({ error: "Error en el servidor" });
         }
     },
-    getPagosFechas: async (req, res) => {
+    getVentasFechas: async (req, res) => {
         try {
             const { fechaInicio, fechaFin } = req.params;
             const fechaInicioObj = new Date(fechaInicio);
