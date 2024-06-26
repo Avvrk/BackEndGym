@@ -15,6 +15,15 @@ router.get('/id/:id', [
     validarCampos
 ], httpVentas.getVentasId);
 
+router.get('/fechainicio/:fechaInicio/fechafin/:fechaFin', [
+    check('fechaInicio', 'La fecha de inicio es requerida.').notEmpty(),
+    check('fechaInicio', 'La fecha de inicio debe ser una fecha válida.').isISO8601().toDate(),
+    check('fechaFin', 'La fecha de fin es requerida.').notEmpty(),
+    check('fechaFin', 'La fecha de fin debe ser una fecha válida.').isISO8601().toDate(),
+    validarJWT,
+    validarCampos
+], httpVentas.getVentasFecha);
+
 router.post('/', [
     check('codigoProducto', 'El código del producto es requerido.').notEmpty(),
     check('idInvetario', 'El idInventario debe ser un mongoId valido').isMongoId(),
