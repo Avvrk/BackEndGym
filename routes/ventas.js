@@ -22,7 +22,7 @@ router.get('/fechainicio/:fechaInicio/fechafin/:fechaFin', [
     check('fechaFin', 'La fecha de fin debe ser una fecha válida.').isISO8601().toDate(),
     validarJWT,
     validarCampos
-], httpVentas.getVentasFecha);
+], httpVentas.getVentasFechas);
 
 router.post('/', [
     check('codigoProducto', 'El código del producto es requerido.').notEmpty(),
