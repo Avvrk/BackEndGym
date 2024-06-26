@@ -18,6 +18,22 @@ const httpInventarios = {
             res.status(500).json({ error: error.message });
         }
     },
+    getInventarioActivos: async (req, res) => {
+        try {
+            const inventarios = await Inventario.find({ estado: 1 });
+            res.json({ inventarios })
+        } catch {
+            res.status(500).json({ error: error.message });
+        }
+    },
+    getInventarioInactivos: async (req, res) => {
+        try {
+            const inventarios = await Inventario.find({ estado: 0 });
+            res.json({ inventarios })
+        } catch {
+            res.status(500).json({ error: error.message });
+        }
+    },
     getInventariosTotal: async (req, res) => {
         try {
             const inventariosTotal = await Inventario.find();
