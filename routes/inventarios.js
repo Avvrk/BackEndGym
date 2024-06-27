@@ -24,6 +24,7 @@ router.get('/total', validarJWT, httpInventarios.getInventariosTotal);
 
 router.post('/', [
     check('codigo', 'El código no puede estar vacío.').notEmpty(),
+    check('codigo').custom(helpersInventarios.validarCodigoRepetido),
     check('descripcion', 'La descripción no puede estar vacía.').notEmpty(),
     check('valor', 'El valor debe ser un número válido.').isNumeric(),
     check('cantidad', 'La cantidad debe ser un número válido.').isNumeric(),
@@ -33,6 +34,10 @@ router.post('/', [
 
 router.put('/:id', [
     check('id', 'Se necesita un mongoId válido.').isMongoId(),
+    check('codigo').custom(async (codigo, { req }) => {
+        const id = req.params.id;
+        await helpersInventarios.validarCodigoRepetido(codigo, id);
+    }),
     check('valor').custom(helpersInventarios.validarValor),
     check('cantidad').custom(helpersInventarios.validarCantidad),
     validarJWT,

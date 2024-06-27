@@ -42,6 +42,25 @@ const helpersInventarios = {
         } else {
             return true;
         }
+    },
+    validarCodigoRepetido: async (codigo, id = null) => {
+        try {
+            const query = { codigo };
+    
+            // Si se proporciona un ID, exclúyelo de la búsqueda
+            if (id) {
+                query._id = { $ne: id };
+            }
+            const buscarCodigo = await Inventario.findOne(query);
+            console.log(buscarCodigo);
+            if (buscarCodigo) {
+                throw new Error("El código está repetido");
+            }
+    
+            return true;
+        } catch (error) {
+            throw new Error("Error al buscar el código en la base de datos: " + error.message);
+        }
     }
 };
 
