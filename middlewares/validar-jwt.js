@@ -73,6 +73,6 @@ const validarJWT = async (req, res, next) => {
 }
 
 
-export { generarJWT, validarJWT }
+export { generarJWT, validarJWT, generarJWTPassword }
 
 
