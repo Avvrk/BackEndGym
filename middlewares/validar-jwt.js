@@ -17,6 +17,22 @@ const generarJWT = (uid) => {
     })
 }
 
+const generarJWTPassword = (uid) => {
+    return new Promise((resolve, reject) => {
+        const payload = { uid };
+        jwt.sign(payload, process.env.SECRETORPRIVATEKEY, {
+            //30 days
+            expiresIn: "5m"
+        }, (err, token) => {
+            if (err) {
+                reject("No se pudo generar el token")
+            } else {
+                resolve(token)
+            }
+        })
+    })
+}
+
 const validarJWT = async (req, res, next) => {
     const token = req.header("token");
     if (!token) {

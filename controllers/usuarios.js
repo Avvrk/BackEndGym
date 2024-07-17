@@ -1,6 +1,7 @@
 import { generarJWT, validarJWT } from "../middlewares/validar-jwt.js";
 import Usuario from "../models/usuarios.js";
 import bcryptjs from "bcryptjs";
+import { enviarCorreoRecuperacion } from "../middlewares/email.js";
 
 const httpUsuarios = {
     getUsuarios: async (req, res) => {
@@ -125,6 +126,23 @@ const httpUsuarios = {
             res.status(500).json({ error: "Error en el servidor" });
         }
     },
+    recuperarPassword: async (req, res) => {
+        const { email } = req.body;
+        try {
+          const user = await Usuario.findOne({ email });
+          if (!user) {
+            return res.status(404).json({ msg: 'Usuario no encontrado' });
+          }
+
+          const token = await generarJWTPassword(user._id);
+          await enviarCorreoRecuperacion(email, token);
+
+          res.json({ msg: 'Correo de recuperación enviado' });
+        } catch (error) {
+          console.error(error);
+          res.status(500).json({ msg: 'Error de servidor' });
+        }
+      },
 };
 
 export default httpUsuarios;
