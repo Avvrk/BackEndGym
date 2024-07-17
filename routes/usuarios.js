@@ -44,7 +44,7 @@ router.put('/:id', [
     validarCampos
 ], httpUsuarios.putUsuarios);
 
-router.put('/contrasenia', [
+router.put('/reset/password', [
     check('email', 'El correo electrónico es requerido.').notEmpty(),
     check('email', 'El correo electrónico debe tener un formato válido.').isEmail(),
     validarCampos
