@@ -57,6 +57,7 @@ const httpUsuarios = {
             console.log(error);
             return res.status(500).json({
                 msg: "Hable con su WebMaster.",
+                err: error
             });
         }
     },
