@@ -1,4 +1,4 @@
-import { generarJWTPassword, validarJWT } from "../middlewares/validar-jwt.js";
+import { generarJWTPassword, generarJWT } from "../middlewares/validar-jwt.js";
 import Usuario from "../models/usuarios.js";
 import bcryptjs from "bcryptjs";
 import { enviarCorreoRecuperacion } from "../middlewares/email.js";
