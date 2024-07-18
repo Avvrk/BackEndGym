@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { check } from 'express-validator';
 import { validarCampos } from '../middlewares/validar-datos.js';
-import { validarJWT } from '../middlewares/validar-jwt.js';
+import { validarJWT, validarJWTPassword } from '../middlewares/validar-jwt.js';
 import httpUsuarios from '../controllers/usuarios.js';
 import helpersUsuarios from '../helpers/usuarios.js';
 
@@ -64,5 +64,8 @@ router.put('/inactivar/:id', [
     validarCampos
 ], httpUsuarios.putUsuariosInactivar);
 
+router.put('/aviso/token', validarJWTPassword, httpUsuarios.avisoToken)
+
+router.put('/update/password/:id', httpUsuarios.putUsuariosContrasenia);
 
 export default router;

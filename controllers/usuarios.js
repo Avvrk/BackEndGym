@@ -1,4 +1,4 @@
-import { generarJWTPassword, generarJWT } from "../middlewares/validar-jwt.js";
+import { generarJWTPassword, generarJWT, validarJWTPassword } from "../middlewares/validar-jwt.js";
 import Usuario from "../models/usuarios.js";
 import bcryptjs from "bcryptjs";
 import { enviarCorreoRecuperacion } from "../middlewares/email.js";
@@ -94,7 +94,7 @@ const httpUsuarios = {
             res.status(500).json({ error: "Error en el servidor" });
         }
     },
-    putUsuariosContraseña: async (req, res) => {
+    putUsuariosContrasenia: async (req, res) => {
         try {
             const { id } = req.params;
             const { nuevaContrasenia } = req.body;
@@ -143,7 +143,19 @@ const httpUsuarios = {
           console.error(error);
           res.status(500).json({ msg: 'Error de servidor' });
         }
-      },
+    },
+    avisoToken: async (req, res) => {
+        try {
+            const usuario = req.usuariodbtoken;
+
+            res.json({
+                msg: "Operacion realizada con exito",
+                usuario: usuario
+            })
+        } catch (error) {
+            res.json({ msg: 'Error de servidor' })
+        }
+    },
 };
 
 export default httpUsuarios;

@@ -5,7 +5,7 @@ export const enviarCorreoRecuperacion = async (email, token) => {
     service: 'Gmail',
     auth: {
       user: 'gymforzaoficial@gmail.com',
-      pass: 'Password2000',
+      pass: process.env.FROM_EMAIL_2FA,
     },
   });
 
@@ -13,7 +13,7 @@ export const enviarCorreoRecuperacion = async (email, token) => {
     from: 'gymforzaoficial@gmail.com', 
     to: email,
     subject: 'Recuperación de contraseña',
-    text: `Utiliza el siguiente enlace para restablecer tu contraseña: https://gymmmm.netlify.app/#/reset-password?token=${token}`,
+    text: `Utiliza el siguiente enlace para restablecer tu contraseña: \nhttps://gymmmm.netlify.app/#/reset-password?tokenP=${token}`,
   };
 
   await transporter.sendMail(mailOptions);
