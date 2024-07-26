@@ -5,12 +5,10 @@ const helpersPlanes={
 				throw new Error("El valor debe ser un numero valido");
 			} else if (v < 0) {
 				throw new Error("El valor debe ser un numero positivo");
-			} else {
-				return true;
 			}
-        } else {
-            return true;
+			return true;
         }
+        return true;
     },
     validarDias: (d) => {
         if (d != undefined) {
@@ -18,12 +16,10 @@ const helpersPlanes={
                 throw new Error("Los dias deben ser un numero valido");
             } else if (d < 0) {
                 throw new Error("El valor debe ser un numero positivo");
-            } else {
-                return true
             }
-        } else {
-            return true;
+            return true
         }
+        return true;
     }
 }
 

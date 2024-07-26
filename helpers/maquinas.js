@@ -12,27 +12,13 @@ function dateValido(dateString) {
 }
 
 const helpersMaquinas={
-    validarFechaIngreso: (fI) => {
-        if (fI != undefined) {
-            if (!dateValido(fI)) {
-                throw new Error("La fecha debe ser una fecha valida")
-            } else {
-				return true;
-			}
-        } else {
-            return true;
+    validarFecha: (fecha) => {
+        if (fecha !== undefined) {
+            if (!dateValido(fecha)) {
+                throw new Error("Ingrese una fecha válida.");
+            }
         }
-    },
-    validarUltMan: (fUM) => {
-        if (fUM != undefined) {
-            if (!dateValido(fUM)) {
-                throw new Error("La fecha debe ser una fecha valida")
-            } else {
-				return true;
-			}
-        } else {
-            return true;
-        }
+        return true;
     },
     validarIdSede: async (id) => {
         if (id != undefined) {
@@ -40,15 +26,13 @@ const helpersMaquinas={
 				const buscarSede = await Sede.findById(id);
 				if (!buscarSede) {
 					throw new Error("La sede del usuario no existe");
-				} else {
-					return true;
 				}
+				return true;
 			} catch (error) {
 				throw new Error("Error al buscar la sede en la base de datos: " + error.message);
 			}
-		} else {
-			return true;
 		}
+		return true;
     }
 }
 

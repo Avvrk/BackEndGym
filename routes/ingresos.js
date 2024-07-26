@@ -17,7 +17,7 @@ router.get("/id/:id", [
 
 router.post("/", [
     check('fecha', 'La fecha no puede estar vacía').notEmpty(),
-    check('fecha', 'Debe ser una fecha válida').isISO8601().toDate(),
+    check('fecha').custom(helpersIngresos.validarFecha),
     check('sede', 'La sede no puede estar vacía').notEmpty(),
     check('cliente', 'Se necesita un mongoId válido').isMongoId(),
     validarJWT,

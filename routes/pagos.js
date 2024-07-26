@@ -11,9 +11,9 @@ router.get('/', validarJWT, httpPagos.getPagos);
 
 router.get('/fechainicio/:fechaInicio/fechafin/:fechaFin', [
     check('fechaInicio', 'La fecha de inicio es requerida.').notEmpty(),
-    check('fechaInicio', 'La fecha de inicio debe ser una fecha válida.').isISO8601().toDate(),
+    check('fechaInicio').custom(helpersPagos.validarFecha),
     check('fechaFin', 'La fecha de fin es requerida.').notEmpty(),
-    check('fechaFin', 'La fecha de fin debe ser una fecha válida.').isISO8601().toDate(),
+    check('fechaFin').custom(helpersPagos.validarFecha),
     validarJWT,
     validarCampos
 ], httpPagos.getPagosFechas);
@@ -40,7 +40,7 @@ router.post('/', [
     check('_idPlan', 'El plan es requerido.').notEmpty(),
     check('_idPlan', 'El ID del plan debe ser un mongoId válido.').isMongoId(),
     check('fecha', 'La fecha es requerida.').notEmpty(),
-    check('fecha', 'La fecha debe ser una fecha válida.').isISO8601().toDate(),
+    check('fecha').custom(helpersPagos.validarFecha),
     check('valor', 'El valor es requerido.').notEmpty(),
     check('valor', 'El valor debe ser un número válido.').isNumeric(),
     validarJWT,

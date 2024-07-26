@@ -6,12 +6,10 @@ const helpersUsuarios = {
         if (t != undefined) {
             if (isNaN(Number(t))) {
                 throw new Error("El teléfono debe ser un número válido.");
-            } else {
-                return true;
             }
-        } else {
             return true;
         }
+        return true;
     },
     validarIdSede: async (idS) => {
         if (idS != undefined) {
@@ -19,23 +17,20 @@ const helpersUsuarios = {
                 const buscarSede = await Sede.findById(idS);
                 if (!buscarSede) {
                     throw new Error("La sede del usuario no existe");
-                } else {
-                    return true;
                 }
+                return true;
             } catch (error) {
                 throw new Error("Error al buscar la sede en la base de datos: " + error.message);
             }
-        } else {
-            return true;
         }
+        return true;
     },
     validarContrasenia: (contrasenia, contraseniaEncriptada) => {
         const validarContraseña = bcryptjs.compareSync(contrasenia, contraseniaEncriptada);
         if (!validarContraseña) {
             throw new Error("La contraseña es incorrecta");
-        } else {
-            return true;
         }
+        return true;
     },
 };
 

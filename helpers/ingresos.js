@@ -1,3 +1,4 @@
+// Función para verificar si una cadena de fecha es válida y está en el formato YYYY-MM-DD
 function dateValido(dateString) {
     const registroTiempo = Date.parse(dateString);
     if (isNaN(registroTiempo)) {
@@ -13,13 +14,10 @@ const helpersIngresos = {
     validarFecha: (fecha) => {
         if (fecha !== undefined) {
             if (!dateValido(fecha)) {
-                throw new Error("La fecha no tiene el formato esperado (YYYY-MM-DD).");
-            } else {
-				return true;
-			}
-        } else {
-            return true;
+                throw new Error("No es una fecha válida.");
+            }
         }
+        return true;
     },
 };
 

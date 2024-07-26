@@ -17,9 +17,9 @@ router.get('/id/:id', [
 
 router.get('/fechainicio/:fechaInicio/fechafin/:fechaFin', [
     check('fechaInicio', 'La fecha de inicio es requerida.').notEmpty(),
-    check('fechaInicio', 'La fecha de inicio debe ser una fecha válida.').isISO8601().toDate(),
+    check('fechaInicio').custom(helpersVentas.validarFecha),
     check('fechaFin', 'La fecha de fin es requerida.').notEmpty(),
-    check('fechaFin', 'La fecha de fin debe ser una fecha válida.').isISO8601().toDate(),
+    check('fechaFin').custom(helpersVentas.validarFecha),
     validarJWT,
     validarCampos
 ], httpVentas.getVentasFechas);

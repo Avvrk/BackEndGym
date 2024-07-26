@@ -33,14 +33,14 @@ router.get("/plan/:idPlan", [
 
 router.get("/cumpleanios/:fecha", [
     check('fecha', 'La fecha no puede estar vacía').notEmpty(),
-    check('fecha', 'La fecha solo puede ser una fecha').isISO8601().toDate(),
+    check('fecha').custom(helpersClientes.validarFecha),
     validarJWT,
     validarCampos
 ], httpClientes.getClientesCumpleanios);
 
 router.get("/ingresaron/:fecha", [
     check('fecha', 'La fecha no puede estar vacía').notEmpty(),
-    check('fecha', 'La fecha solo puede ser una fecha').isISO8601().toDate(),
+    check('fecha').custom(helpersClientes.validarFecha),
     validarJWT,
     validarCampos
 ], httpClientes.getClientesIngresaron);
@@ -48,12 +48,12 @@ router.get("/ingresaron/:fecha", [
 router.post("/", [
     check('nombre', 'El nombre no puede estar vacío').notEmpty(),
     check('fechaIngreso', 'La fecha de ingreso no puede estar vacía').notEmpty(),
-    check('fechaIngreso', 'Debe ser una fecha válida').isISO8601().toDate(),
+    check('fechaIngreso').custom(helpersClientes.validarFecha),
     check('documento', 'El documento no puede estar vacío').notEmpty(),
     check('documento', 'El documento solo puede ser números').isNumeric(),
     check('tipoDocumento', 'El tipoDocumento no puede estar vacío').notEmpty(),
     check('fechaNacimiento', 'La fecha de nacimiento no puede estar vacía').notEmpty(),
-    check('fechaNacimiento', 'Debe ser una fecha válida').isISO8601().toDate(),
+    check('fechaNacimiento').custom(helpersClientes.validarFecha),
     check('edad', 'La edad no puede estar vacía').notEmpty(),
     check('edad', 'La edad solo puede ser números').isNumeric(),
     check('direccion', 'La dirección no puede estar vacía').notEmpty(),
@@ -72,7 +72,7 @@ router.post("/", [
 router.post("/seguimiento/:id", [
     check('id', 'El id debe ser un mongoId valido').isMongoId(),
     check('fecha', 'La fecha no puede estar vacia').notEmpty(),
-    check('fecha', 'Debe ser una fecha valida').isISO8601().toDate(),
+    check('fecha').custom(helpersClientes.validarFecha),
     check('peso', 'El peso no puede estar vacio').notEmpty(),
     check('peso', 'El peso solo puede ser numeros').isNumeric(),
     check('imc', 'El imc no puede estar vacio').notEmpty(),
@@ -92,10 +92,10 @@ router.post("/seguimiento/:id", [
 
 router.put("/:id", [
     check('id', 'Se necesita un mongoId válido').isMongoId(),
-    check('fechaIngreso').custom(helpersClientes.validarFechaIngreso),
+    check('fechaIngreso').custom(helpersClientes.validarFecha),
     check('documento').custom(helpersClientes.validarDocumento),
     check('tipoDocumento', 'El tipoDocumento no puede estar vacío').notEmpty(),
-    check('fechaNacimiento').custom(helpersClientes.validarFechaNacimiento),
+    check('fechaNacimiento').custom(helpersClientes.validarFecha),
     check('edad').custom(helpersClientes.validarEdad),
     check('telefono').custom(helpersClientes.validarTelefono),
     check('idPlan').custom(helpersClientes.validarIdPlan),

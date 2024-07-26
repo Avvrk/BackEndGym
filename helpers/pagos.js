@@ -24,26 +24,21 @@ const helpersPagos = {
                 const buscarCliente = await Cliente.findById(c);
                 if (!buscarCliente) {
                     throw new Error("El cliente con este ID no existe");
-                } else {
-                    return true;
                 }
+                return true;
             } catch (error) {
                 throw new Error("Error al buscar el cliente en la base de datos: " + error.message);
             }
-        } else {
-            return true;
         }
+        return true;
     },
-    validarFecha: (f) => {
-        if (f !== undefined) {
-            if (!dateValido(f)) {
-                throw new Error("La fecha debe ser una fecha válida");
-            } else {
-				return true;
-			}
-        } else {
-            return true;
+    validarFecha: (fecha) => {
+        if (fecha !== undefined) {
+            if (!dateValido(fecha)) {
+                throw new Error("Ingrese una fecha válida.");
+            }
         }
+        return true;
     },
     validarValor: (v) => {
         if (v !== undefined) {
@@ -51,12 +46,10 @@ const helpersPagos = {
                 throw new Error("El valor debe ser numérico");
             } else if (v < 0) {
                 throw new Error("El valor debe ser un numero positivo")
-            } else {
-                return true
             }
-        } else {
-            return true;
+            return true
         }
+        return true;
     },
 };
 

@@ -3,23 +3,19 @@ const helpersSedes={
         if (c != undefined) {
             if (isNaN(Number(c))) {
                 throw new Error("El codigo debe ser un numero valido");
-            } else {
-				return true;
-			}
-        } else {
-            return true;
+            }
+			return true;
         }
+        return true;
     },
     validarTelefono: (t) => {
         if (t != undefined) {
             if (isNaN(Number(t))) {
                 throw new Error("El telefono debe ser un numero valido");
-            } else {
-                return true
             }
-        } else {
-            return true;
+            return true
         }
+        return true;
     }
 }
 

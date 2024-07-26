@@ -25,9 +25,9 @@ router.post('/', [
     check('idSede', 'El ID de la sede debe ser un mongoId válido.').isMongoId(),
     check('idSede').custom(helpersMaquinas.validarIdSede),
     check('descripcion', 'La descripción es requerida.').notEmpty(),
-    check('fechaIngreso', 'La fecha de ingreso debe ser una fecha válida.').isISO8601().toDate(),
+    check('fechaIngreso').custom(helpersMaquinas.validarFecha),
     check('fechaUltMan', 'La fecha del último mantenimiento no puede estar vacía.').notEmpty(),
-    check('fechaUltMan', 'La fecha del último mantenimiento debe ser una fecha válida.').isISO8601().toDate(),
+    check('fechaUltMan').custom(helpersMaquinas.validarFecha),
     validarJWT,
     validarCampos
 ], httpMaquinas.postMaquinas);
@@ -35,8 +35,8 @@ router.post('/', [
 router.put('/:id', [
     check('id', 'El ID del mantenimiento es requerido.').notEmpty(),
     check('id', 'El ID del mantenimiento debe ser un mongoId válido.').isMongoId(),
-    check('fechaIngreso').custom(helpersMaquinas.validarFechaIngreso),
-    check('fechaUltMan').custom(helpersMaquinas.validarUltMan),
+    check('fechaIngreso').custom(helpersMaquinas.validarFecha),
+    check('fechaUltMan').custom(helpersMaquinas.validarFecha),
     validarJWT,
     validarCampos
 ], httpMaquinas.putMaquinas);

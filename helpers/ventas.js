@@ -15,16 +15,13 @@ function dateValido(dateString) {
 }
 
 const helpersVentas = {
-    validarFecha: (f) => {
-        if (f != undefined) {
-            if (!dateValido(f)) {
-                throw new Error("La fecha debe ser una fecha valida");
-            } else {
-                return true;
+    validarFecha: (fecha) => {
+        if (fecha !== undefined) {
+            if (!dateValido(fecha)) {
+                throw new Error("Ingrese una fecha válida.");
             }
-        } else {
-            return true;
         }
+        return true;
     },
     validarValorUnitario: (vU) => {
         if (vU != undefined) {
@@ -32,12 +29,10 @@ const helpersVentas = {
                 throw new Error("El valorUnitario debe ser un valor numerico");
             } else if (vU < 0) {
                 throw new Error("El valorUnitario debe ser un numero positivo");
-            } else {
-                return true;
             }
-        } else {
             return true;
         }
+        return true;
     },
     validarValorTotal: (vT) => {
         if (vT != undefined) {
@@ -45,12 +40,10 @@ const helpersVentas = {
                 throw new Error("El valorTotal debe ser un valor numerico");
             } else if (vT < 0) {
                 throw new Error("El valorTotal debe ser un numero positivo");
-            } else {
-                return true;
             }
-        } else {
             return true;
         }
+        return true;
     },
     validarIdInventario: async (idI) => {
         if (idI != undefined) {
@@ -61,15 +54,13 @@ const helpersVentas = {
                 const buscarInventario = await Inventario.findById(iM);
                 if (buscarInventario == undefined) {
                     throw new Error("El inventario no existe");
-                } else {
-                    return true;
                 }
+                return true;
             } catch (error) {
                 throw new Error("Error al buscar el inventario en la base de datos: " + error.message);
             }
-        } else {
-            return true;
         }
+        return true;
     },
 };
 
