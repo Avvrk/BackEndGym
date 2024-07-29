@@ -1,6 +1,5 @@
 import Venta from "../models/ventas.js";
 import Inventario from "../models/inventarios.js";
-import { isIdentityCard } from "validator";
 
 const httpVentas = {
     getVentas: async (req, res) => {
