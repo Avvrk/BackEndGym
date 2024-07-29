@@ -17,9 +17,9 @@ router.get('/id/:id', [
 
 router.get('/fecha1/:fechaInicio/fecha2/:fechaFin', [
     check('fechaInicio', 'La fecha de inicio es requerida.').notEmpty(),
-    check('fechaInicio').custom(httpMantenimientos.validarFecha),
+    check('fechaInicio').custom(helpersMantenimiento.validarFecha),
     check('fechaFin', 'La fecha de fin es requerida.').notEmpty(),
-    check('fechaFin').custom(httpMantenimientos.validarFecha),
+    check('fechaFin').custom(helpersMantenimiento.validarFecha),
     validarJWT,
     validarCampos
 ], httpMantenimientos.getMantenimientosFechas);
@@ -32,7 +32,7 @@ router.post('/', [
     check('idMaquina', 'El ID de la máquina es requerido.').notEmpty(),
     check('idMaquina', 'El ID de la máquina debe ser un mongoId válido.').isMongoId(),
     check('fecha', 'La fecha es requerida.').notEmpty(),
-    check('fecha').custom(httpMantenimientos.validarFecha),
+    check('fecha').custom(helpersMantenimiento.validarFecha),
     check('descripcion', 'La descripción es requerida.').notEmpty(),
     check('responsable', 'El responsable es requerido.').notEmpty(),
     check('precio', 'El precio es requerido.').notEmpty(),
