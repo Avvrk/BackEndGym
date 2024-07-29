@@ -24,8 +24,8 @@ const httpPagos = {
     },
     getPagosPlan: async (req, res) => {
         try {
-            const { plan } = req.params;
-            const pagos = await Pago.find({ plan: plan });
+            const { id } = req.params;
+            const pagos = await Pago.find({ _idPlan: id });
             res.json({ pagos });
         } catch (error) {
             res.status(500).json({ error: error.message });
