@@ -36,11 +36,10 @@ const httpVentas = {
     },
     postVentas: async (req, res) => {
         try {
-            const { fecha, idInventario, codigoProducto, valorUnitario, valorTotal, cantidad } = req.body;
+            const { fecha, idInventario, valorUnitario, valorTotal, cantidad } = req.body;
             const venta = new Venta({
                 fecha,
                 idInventario,
-                codigoProducto,
                 valorUnitario,
                 valorTotal,
                 cantidad,
