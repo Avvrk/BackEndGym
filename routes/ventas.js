@@ -31,6 +31,8 @@ router.post('/', [
     check('valorUnitario', 'El valor unitario debe ser un número válido.').isNumeric(),
     check('valorTotal', 'El valor total es requerido.').notEmpty(),
     check('valorTotal', 'El valor total debe ser un número válido.').isNumeric(),
+    check('cantidad', 'La cantidad no puede estar vacia').notEmpty(),
+    check('cantidad', 'La cantidad debe ser un numero valido').isNumeric(),
     validarJWT,
     validarCampos
 ], httpVentas.postVentas);
