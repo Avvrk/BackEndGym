@@ -39,12 +39,18 @@ const helpersInventarios = {
         return true;
     },
     validarCodigoRepetido: async (codigo, id = null) => {
+        console.log(id);
         try {
             const query = { codigo: codigo.toString() };
+
+            if (!mongoose.Types.ObjectId.isValid(id)) {
+                throw new Error('ID no válido.', id);
+            }
             // Si se proporciona un ID, exclúyelo de la búsqueda
             if (id && mongoose.Types.ObjectId.isValid(id)) {
-                query._id = { $ne: mongoose.Types.ObjectId(id) }; // Convertir id a ObjectId si es necesario
+                query._id = { $ne: new mongoose.Types.ObjectId(id) }; // Usa `new` para crear una nueva instancia de ObjectId
             }
+            
             const buscarCodigo = await Inventario.findOne(query).lean();
             console.log(buscarCodigo);
             if (buscarCodigo) {
