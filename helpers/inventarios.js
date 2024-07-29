@@ -1,3 +1,4 @@
+import mongoose from 'mongoose'
 import Inventario from "../models/inventarios.js";
 
 const helpersInventarios = {
@@ -39,12 +40,12 @@ const helpersInventarios = {
     },
     validarCodigoRepetido: async (codigo, id = null) => {
         try {
-            const query = { codigo };
+            const query = { codigo: codigo.toString() };
             // Si se proporciona un ID, exclúyelo de la búsqueda
-            if (id) {
-                query._id = { $ne: id };
+            if (id && mongoose.Types.ObjectId.isValid(id)) {
+                query._id = { $ne: mongoose.Types.ObjectId(id) }; // Convertir id a ObjectId si es necesario
             }
-            const buscarCodigo = await Inventario.findOne(query);
+            const buscarCodigo = await Inventario.findOne(query).lean();
             console.log(buscarCodigo);
             if (buscarCodigo) {
                 throw new Error("El código está repetido");
