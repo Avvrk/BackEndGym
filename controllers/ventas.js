@@ -47,7 +47,7 @@ const httpVentas = {
 
             const i = await Inventario.findById(idInventario)
             if (!i) {
-                return res.status(404).json({ error: "Inventario no encontrado" });
+                return res.status(404).json({ error: "Inventario no encontrado", msg: i });
             }
 
             i.cantidad -= cantidad
