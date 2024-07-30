@@ -160,7 +160,7 @@ const httpClientes = {
 			} = req.body;
 			const clientes = await Cliente.findById(id);
 			clientes.seguimiento.forEach((elemento, i) => {
-				if (i == index) {
+				if (elemento._id == index) {
 					if (fecha !== undefined) elemento.fecha = fecha;
 					if (peso !== undefined) elemento.peso = peso;
 					if (imc !== undefined) elemento.imc = imc;
@@ -170,6 +170,7 @@ const httpClientes = {
 					if (estatura !== undefined) elemento.estatura = estatura;
 				}
 			});
+			await clientes.save();
 			res.json({ clientes });
 		} catch (error) {
 			res.status(500).json({ error: error.message });
