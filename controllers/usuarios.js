@@ -2,6 +2,7 @@ import { generarJWTPassword, generarJWT, validarJWTPassword } from "../middlewar
 import Usuario from "../models/usuarios.js";
 import bcryptjs from "bcryptjs";
 import { enviarCorreoRecuperacion } from "../middlewares/email.js";
+import jwt from 'jsonwebtoken';
 
 const httpUsuarios = {
     getUsuarios: async (req, res) => {
@@ -96,11 +97,13 @@ const httpUsuarios = {
     },
     putUsuariosContrasenia: async (req, res) => {
         try {
-            const { id } = req.params;
+            const { token } = req.params;
             const { nuevaContrasenia } = req.body;
+            const { uid } = jwt.verify(token, process.env.SECRETORPRIVATEKEY)
+
             const salt = bcryptjs.genSaltSync();
             const encriptada = bcryptjs.hashSync(nuevaContrasenia, salt);
-            const usuario = await Usuario.findByIdAndUpdate(id, { password: encriptada }, { new: true });
+            const usuario = await Usuario.findByIdAndUpdate(uid, { password: encriptada }, { new: true });
             res.json({ usuario });
         } catch (error) {
             console.log(error);

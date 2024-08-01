@@ -64,8 +64,8 @@ router.put('/inactivar/:id', [
     validarCampos
 ], httpUsuarios.putUsuariosInactivar);
 
-router.put('/aviso/token', validarJWTPassword, httpUsuarios.avisoToken)
+router.put('/aviso/token', validarJWTPassword, httpUsuarios.avisoToken);
 
-router.put('/update/password/:id', httpUsuarios.putUsuariosContrasenia);
+router.put('/update/password/:token', httpUsuarios.putUsuariosContrasenia);
 
 export default router;
