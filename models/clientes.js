@@ -13,7 +13,7 @@ const clienteSchema = new mongoose.Schema({
     observaciones: { type: String },
     estado: { type: Number, default: 1 },
     plan: { type: String },
-    _idPlan: { type: mongoose.Schema.Types.ObjectId, ref: "plane", required: true  },
+    _idPlan: { type: mongoose.Schema.Types.ObjectId, ref: "Plane", required: true  },
     fechaVencimiento: { type: Date },
     foto: { type: String },
     seguimiento: [
