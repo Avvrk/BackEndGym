@@ -13,7 +13,7 @@ export const enviarCorreoRecuperacion = async (email, token) => {
     from: 'gymforzaoficial@gmail.com', 
     to: email,
     subject: 'Recuperación de contraseña',
-    text: `Utiliza el siguiente enlace para restablecer tu contraseña: \nhttp://localhost:5173/#/reset-password?tokenP=${token}`,
+    text: `Utiliza el siguiente enlace para restablecer tu contraseña: \nhttps://gymmmm.netlify.app/#/reset-password?tokenP=${token}`,
   };
 
   await transporter.sendMail(mailOptions);
