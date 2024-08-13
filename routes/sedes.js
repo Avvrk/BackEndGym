@@ -23,6 +23,7 @@ router.post('/', [
     check('nombre', 'El nombre de la sede es requerido.').notEmpty(),
     check('direccion', 'La dirección de la sede es requerida.').notEmpty(),
     check('codigo', 'El código de la sede es requerido.').notEmpty(),
+    check('codigo').custom(helpersSedes.validarCodigoRepetido),
     check('horario', 'El horario de la sede es requerido.').notEmpty(),
     check('ciudad', 'La ciudad de la sede es requerida.').notEmpty(),
     check('telefono', 'El teléfono de la sede es requerido.').notEmpty(),
@@ -34,7 +35,10 @@ router.post('/', [
 router.put('/:id', [
     check('id', 'El ID del mantenimiento es requerido.').notEmpty(),
     check('id', 'El ID del mantenimiento debe ser un mongoId válido.').isMongoId(),
-    check('codigo').custom(helpersSedes.validarCodigo),
+    check('codigo').custom(async (codigo, { req }) => {
+        const id = req.params.id;
+        await helpersSedes.validarCodigoRepetido(codigo, id);
+    }),
     check('telefono').custom(helpersSedes.validarTelefono),
     validarJWT,
     validarCampos

@@ -21,6 +21,7 @@ router.get('/inactivos', validarJWT, httpPlanes.getPlanesInactivos);
 
 router.post('/', [
     check('codigo', 'El código del plan es requerido.').notEmpty(),
+    check('codigo').custom(helpersPlanes.validarCodigoRepetido),
     check('descripcion', 'La descripción del plan es requerida.').notEmpty(),
     check('valor', 'El valor del plan es requerido.').notEmpty(),
     check('valor', 'El valor del plan debe ser un número válido.').isNumeric(),
@@ -33,6 +34,10 @@ router.post('/', [
 router.put('/:id', [
     check('id', 'El ID del mantenimiento es requerido.').notEmpty(),
     check('id', 'El ID del mantenimiento debe ser un mongoId válido.').isMongoId(),
+    check('codigo').custom(async (codigo, { req }) => {
+        const id = req.params.id;
+        await helpersPlanes.validarCodigoRepetido(codigo, id);
+    }),
     check('valor').custom(helpersPlanes.validarValor),
     check('dias').custom(helpersPlanes.validarDias),
     validarJWT,
