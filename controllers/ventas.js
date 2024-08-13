@@ -37,7 +37,7 @@ const httpVentas = {
     postVentas: async (req, res) => {
         try {
             const { fecha, idInventario, valorUnitario, valorTotal, cantidad } = req.body;
-            const venta = new Venta({
+            const ventas = new Venta({
                 fecha,
                 idInventario,
                 valorUnitario,
@@ -53,8 +53,8 @@ const httpVentas = {
             i.cantidad -= cantidad
 
             await i.save();
-            await venta.save();
-            res.json({ venta });
+            await ventas.save();
+            res.json({ ventas });
         } catch (errorr) {
             console.error(errorr);
             res.status(500).json({ error: "Error en el servidor", errorr });

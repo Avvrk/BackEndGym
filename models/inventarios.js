@@ -5,7 +5,7 @@ const inventarioSchema = new mongoose.Schema({
     descripcion: { type: String },
     valor: { type: Number },
     cantidad: { type: Number },
-    _idProveedor: { type: mongoose.Schema.Types.ObjectId, ref: "Proveedore", required: true  },
+    _idProveedor: { type: mongoose.Schema.Types.ObjectId, ref: "Proveedore" },
     estado: { type: Number, default: 1 },
 });
 

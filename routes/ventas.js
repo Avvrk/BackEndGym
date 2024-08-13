@@ -25,6 +25,7 @@ router.get('/fechainicio/:fechaInicio/fechafin/:fechaFin', [
 ], httpVentas.getVentasFechas);
 
 router.post('/', [
+    check('idInventario', "El id invetario es requerido").notEmpty(),
     check('idInventario', 'El idInventario debe ser un mongoId valido').isMongoId(),
     check('valorUnitario', 'El valor unitario es requerido.').notEmpty(),
     check('valorUnitario', 'El valor unitario debe ser un número válido.').isNumeric(),
