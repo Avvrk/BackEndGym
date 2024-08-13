@@ -55,9 +55,9 @@ const httpVentas = {
             await i.save();
             await venta.save();
             res.json({ venta });
-        } catch (error) {
-            console.error(error);
-            res.status(500).json({ error: "Error en el servidor" });
+        } catch (errorr) {
+            console.error(errorr);
+            res.status(500).json({ error: "Error en el servidor", errorr });
         }
     },
     putVentas: async (req, res) => {
@@ -73,7 +73,7 @@ const httpVentas = {
             i.cantidad += cantidadAnterior
 
             i.cantidad -= info.cantidad
-            
+
             await i.save();
             const ventas = await Venta.findByIdAndUpdate(id, info, { new: true });
             res.json({ ventas });
