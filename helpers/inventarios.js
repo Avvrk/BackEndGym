@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 import Inventario from "../models/inventarios.js";
-import Proveedor from "../models/proveedor.js";
+import Proveedor from "../models/proveedores.js";
 
 const helpersInventarios = {
     validarValor: (valor) => {
