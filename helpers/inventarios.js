@@ -55,7 +55,7 @@ const helpersInventarios = {
             }
             return true;
         } catch (error) {
-            throw new Error("Error al buscar el código en la base de datos: " + error.message);
+            throw new Error(error.message);
         }
     }
 };
