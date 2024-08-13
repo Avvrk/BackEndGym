@@ -63,7 +63,18 @@ const httpVentas = {
     putVentas: async (req, res) => {
         try {
             const { id } = req.params;
-            const { ...info } = req.body;
+            const { cantidadAnterior,...info } = req.body;
+
+            const i = await Inventario.findById(info.idInventario)
+            if (!i) {
+                return res.status(404).json({ error: "Inventario no encontrado", msg: i });
+            }
+
+            i.cantidad += cantidadAnterior
+
+            i.cantidad -= info.cantidad
+            
+            await i.save();
             const ventas = await Venta.findByIdAndUpdate(id, info, { new: true });
             res.json({ ventas });
         } catch (error) {
