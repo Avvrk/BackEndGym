@@ -45,8 +45,8 @@ const httpInventarios = {
     },
     postInventarios: async (req, res) => {
         try {
-            const { codigo, descripcion, valor, cantidad } = req.body;
-            const inventarios = new Inventario({ codigo, descripcion, valor, cantidad });
+            const { codigo, descripcion, valor, cantidad, _idProveedor } = req.body;
+            const inventarios = new Inventario({ codigo, descripcion, valor, cantidad, _idProveedor });
             await inventarios.save();
             res.json({ inventarios });
         } catch (error) {

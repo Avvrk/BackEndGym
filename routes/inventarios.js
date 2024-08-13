@@ -28,6 +28,8 @@ router.post('/', [
     check('descripcion', 'La descripción no puede estar vacía.').notEmpty(),
     check('valor', 'El valor debe ser un número válido.').isNumeric(),
     check('cantidad', 'La cantidad debe ser un número válido.').isNumeric(),
+    check('_idProveedor', 'Ingrese un mongo id valido').isMongoId(),
+    check('_idProveedor').custom(helpersInventarios.validarIdProveedor),
     validarJWT,
     validarCampos
 ], httpInventarios.postInventarios);
@@ -40,6 +42,8 @@ router.put('/:id', [
     }),
     check('valor').custom(helpersInventarios.validarValor),
     check('cantidad').custom(helpersInventarios.validarCantidad),
+    check('_idProveedor', 'Ingrese un mongo id valido').isMongoId(),
+    check('_idProveedor').custom(helpersInventarios.validarIdProveedor),
     validarJWT,
     validarCampos
 ], httpInventarios.putInventarios);

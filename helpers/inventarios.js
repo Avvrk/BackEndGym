@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
 import Inventario from "../models/inventarios.js";
+import Proveedor from "../models/proveedor.js";
 
 const helpersInventarios = {
     validarValor: (valor) => {
@@ -34,6 +35,20 @@ const helpersInventarios = {
 				return true;
 			} catch (error) {
 				throw new Error("Error al buscar el producto en la base de datos: " + error.message);
+			}
+        }
+        return true;
+    },
+    validarIdProveedor: async (idP) => {
+        if (idP !== undefined) {
+            try {
+				const buscarProducto = await Proveedor.findById(idP);
+				if (!buscarProducto) {
+					throw new Error("El proveedor no existe");
+				}
+				return true;
+			} catch (error) {
+				throw new Error("Error al buscar el proveedor en la base de datos: " + error.message);
 			}
         }
         return true;
