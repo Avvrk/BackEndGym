@@ -1,4 +1,6 @@
 import Cliente from "../models/clientes.js";
+import Plan from "../models/planes.js";
+import { addDays } from "date-fns";
 
 const httpClientes = {
 	getClientes: async (req, res) => {
@@ -90,6 +92,14 @@ const httpClientes = {
 				observaciones,
 				// foto,
 			} = req.body;
+
+			let fechaActual = new Date();
+			fechaActual.setHours(0, 0, 0, 0);
+			
+			const buscarPlan = await Plan.findById(_idPlan);
+
+			let nuevaFecha = addDays(fechaActual, buscarPlan.dias);
+			
 			const clientes = new Cliente({
 				nombre,
 				fechaIngreso,
@@ -104,6 +114,7 @@ const httpClientes = {
 				plan,
 				_idPlan,
 				observaciones,
+				fechaVencimiento: nuevaFecha,
 				// foto,
 			});
 			await clientes.save();

@@ -15,6 +15,15 @@ import "dotenv/config";
 import cors from "cors";
 
 
+import cron from 'node-cron';
+
+cron.schedule('0 0 * * *', async () => {
+
+}, {
+    scheduled: true,
+    timezone: "America/Bogota"
+})
+
 const app = express();
 
 app.use(cors());
