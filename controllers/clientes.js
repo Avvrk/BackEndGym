@@ -148,6 +148,17 @@ const httpClientes = {
 		try {
 			const { id } = req.params;
 			const { ...info } = req.body;
+
+			let fechaActual = new Date();
+			fechaActual.setHours(0, 0, 0, 0);
+			
+			const buscarPlan = await Plan.findById(info._idPlan);
+			const buscarCliente = await Cliente.findById(id);
+			if(buscarCliente.estado === 1 && info._idPlan != buscarCliente._idPlan || buscarCliente.estado === 0) {
+				let nuevaFecha = addDays(fechaActual, buscarPlan.dias);
+				info.fechaVencimiento = nuevaFecha
+			}
+
 			const clientes = await Cliente.findByIdAndUpdate(id, info, {
 				new: true,
 			});
