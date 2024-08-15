@@ -63,7 +63,8 @@ const enviarCorreoAviso = async (email, nombre, fechaV) => {
             <p>El equipo de Forza Gym 💪</p>
             </div>
             `,
-
+        };
+        
         await transporter.sendMail(mailOptions);
     } catch (error) {
         console.log(error.message);
