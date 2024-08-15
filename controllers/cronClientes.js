@@ -2,9 +2,9 @@ import cron from 'node-cron';
 import Cliente from '../models/clientes.js';
 import { enviarCorreoAviso } from '../middlewares/email.js';
 
-cron.schedule('00 22 * * *', async () => {
+cron.schedule('0 0 * * *', async () => {
     try {
-        const clientes = Cliente.find();
+        const clientes = await Cliente.find();
         clientes.forEach(c => {
             const fechaF = c.fechaVencimiento;
             let fechaD = new Date(fechaF)
@@ -15,7 +15,7 @@ cron.schedule('00 22 * * *', async () => {
             const diferenciaDias = (fechaD - hoy) / (1000 * 60 * 60 * 24); // Diferencia en días
 
             if (diferenciaDias <= 5) {
-                enviarCorreoAviso(clientes.correo, clientes.nombre, clientes.fechaD.split("T")[0])
+                enviarCorreoAviso(c.correo, c.nombre, fechaD.toISOString().split("T")[0])
             }
         })
     } catch (error) {
