@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const clienteSchema = new mongoose.Schema({
     nombre: { type: String },
+    correo: { type: String },
     fechaIngreso: { type: Date, default: Date.now },
     documento: { type: Number, unique: true },
     tipoDocumento: { type: String },

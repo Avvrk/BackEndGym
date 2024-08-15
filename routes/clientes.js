@@ -47,6 +47,8 @@ router.get("/ingresaron/:fecha", [
 
 router.post("/", [
     check('nombre', 'El nombre no puede estar vacío').notEmpty(),
+    check('correo', 'El correo no puede estar vacío').notEmpty(),
+    check('correo', 'El correo electrónico debe tener un formato válido.').isEmail(),
     check('fechaIngreso', 'La fecha de ingreso no puede estar vacía').notEmpty(),
     check('fechaIngreso').custom(helpersClientes.validarFecha),
     check('documento', 'El documento no puede estar vacío').notEmpty(),
@@ -92,6 +94,8 @@ router.post("/seguimiento/:id", [
 
 router.put("/:id", [
     check('id', 'Se necesita un mongoId válido').isMongoId(),
+    check('correo', 'El correo no puede estar vacío').notEmpty(),
+    check('correo', 'El correo electrónico debe tener un formato válido.').isEmail(),
     check('fechaIngreso').custom(helpersClientes.validarFecha),
     check('documento').custom(helpersClientes.validarDocumento),
     check('tipoDocumento', 'El tipoDocumento no puede estar vacío').notEmpty(),

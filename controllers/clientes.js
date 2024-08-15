@@ -78,6 +78,7 @@ const httpClientes = {
 		try {
 			const {
 				nombre,
+				correo,
 				fechaIngreso,
 				documento,
 				tipoDocumento,
@@ -102,6 +103,7 @@ const httpClientes = {
 			
 			const clientes = new Cliente({
 				nombre,
+				correo,
 				fechaIngreso,
 				documento,
 				tipoDocumento,
@@ -224,6 +226,17 @@ const httpClientes = {
 			res.status(500).json({ error: error.message });
 		}
 	},
+	actualizarEstado: async (req, res) => {
+		try {
+			const hoy = new Date();
+			const resultado = await Cliente.updateMany(
+				{ fechaVencimiento: { $lt: hoy } },
+				{ $set: { estado: 0 } }
+			)
+		} catch (error) {
+			console.error(error.message);
+		}
+	}
 };
 
 export default httpClientes;

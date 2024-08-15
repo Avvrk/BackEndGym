@@ -16,9 +16,12 @@ import cors from "cors";
 
 
 import cron from 'node-cron';
+import httpClientes from "./controllers/clientes.js";
+
+import "./controllers/cronClientes.js"
 
 cron.schedule('0 0 * * *', async () => {
-
+    await httpClientes.actualizarEstado();
 }, {
     scheduled: true,
     timezone: "America/Bogota"
